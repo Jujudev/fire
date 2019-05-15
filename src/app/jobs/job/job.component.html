@@ -1,0 +1,39 @@
+  <form #jobForm = "ngForm" (ngSubmit)="onSubmit(jobForm)">
+    <input type="hidden" name="$key" #key="ngModel" [(ngModel)]="jobService.selectedJob.$key"> 
+    <div class="form-group">
+      <label>Title</label>
+      <input class="form-control" name="title" #name="ngModel" [(ngModel)]="jobService.selectedJob.title" placeholder="Title" required />
+    </div>
+    <div class="form-group">
+      <label>Description</label>
+      <input class="form-control" name="description" #description="ngModel" [(ngModel)]="jobService.selectedJob.description" placeholder="Description" required/>
+    </div>
+    <div class="form-group">
+      <label>Salary</label>
+      <div class="input-group">
+          <div class="input-group-addon">
+              <i class="fa fa-dollar-sign"></i>
+          </div>
+          <input class="form-control" name="salary" #salary="ngModel" [(ngModel)]="jobService.selectedJob.salary" placeholder="Salalary" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label>PublishDate</label>
+      <span class="form-control">{{jobService.selectedJob.publishDate | date:'medium'}}</span>
+    </div>
+    <div class="form-group">
+        <button class="btn btn-default" type="submit" [disabled]="!jobForm.valid">
+          <i class="fa fa-save"></i>
+          Submit
+        </button>
+        <button class="btn btn-default" type="button" (click)="resetForm(jobForm)">
+          Reset
+          <i class="fa fa-undo-alt"></i>
+        </button>
+    </div>
+    <div class="form-group">
+         
+  
+    </div>
+   </form> 
+

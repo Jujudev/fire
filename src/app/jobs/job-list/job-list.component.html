@@ -1,0 +1,18 @@
+<h6 class="text-center">Job Register</h6><br/>
+<table class="table table-sm table-hover">
+    <tr *ngFor="let job of jobList">
+        <td>{{job.title}}</td>
+        <td>{{job.description}}</td>
+        <td>{{job.salary}}</td>
+        <td>
+          <a class="btn" (click)="onEdit(job)">
+            <i class="fa fa-pencil-alt"></i>
+          </a>
+        </td>
+        <td>
+          <a class="btn" (click)="onDelete(job.$key)">
+            <i class="fa fa-trash"></i>
+          </a>
+        </td>
+    </tr>
+</table>
