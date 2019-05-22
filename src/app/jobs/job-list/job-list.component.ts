@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { JobService } from '../shared/job.service';
 import { Job } from '../shared/job.model';
 import { ToastrService } from 'ngx-toastr';
+import { DocumentChangeAction } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-job-list',
@@ -9,25 +10,21 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./job-list.component.scss']
 })
 export class JobListComponent implements OnInit {
-  jobList : Job[];
+  jobList : Array<any>;
 
   constructor(private jobService : JobService, private tostr : ToastrService) { }
 
   ngOnInit() {
-    var x = this.jobService.getData();
-    x.snapshotChanges().subscribe(item => {
-      this.jobList = [];
-      item.forEach(element => {
-        var y = element.payload.toJSON();
-        y["$key"] = element.key;
-        this.jobList.push(y as Job);
-      });
+    this.jobService.getJobs()
+    .subscribe(result => {
+      this.jobList = result;
     });
   }
 
-  onEdit(job : Job){
-    console.info('Editing job...')
+  onEdit(job : Job, id : string){
+    console.info('Editing job...', id)
     this.jobService.selectedJob = Object.assign({}, job);
+    this.jobService.selectedJob.$id = id;
   }
 
   onDelete(key : string) {
@@ -38,4 +35,13 @@ export class JobListComponent implements OnInit {
     }
   }
 
+  getWrappedResult(result : DocumentChangeAction<{}>[])
+  {
+    result.forEach(element => {
+      var y = element.payload.doc.data();
+      y["id"] = element.payload.doc.id;
+      
+      this.jobList.push(y as Job);
+    })
+  }
 }

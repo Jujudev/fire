@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+
 import { environment } from '../environments/environment';
 export const firebaseConfig = environment.firebaseConfig;
 
@@ -29,6 +31,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
+    AngularFirestoreModule,
     FormsModule,
     ToastrModule.forRoot(),
     BrowserAnimationsModule

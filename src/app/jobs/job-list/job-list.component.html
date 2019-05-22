@@ -1,16 +1,16 @@
 <h6 class="text-center">Job Register</h6><br/>
 <table class="table table-sm table-hover">
     <tr *ngFor="let job of jobList">
-        <td>{{job.title}}</td>
-        <td>{{job.description}}</td>
-        <td>{{job.salary}}</td>
+        <td>{{job.payload.doc.data().title}}</td>
+        <td>{{job.payload.doc.data().description}}</td>
+        <td>{{job.payload.doc.data().salary}}</td>
         <td>
-          <a class="btn" (click)="onEdit(job)">
+          <a class="btn" (click)="onEdit(job.payload.doc.data(), job.payload.doc.id)">
             <i class="fa fa-pencil-alt"></i>
           </a>
         </td>
         <td>
-          <a class="btn" (click)="onDelete(job.$key)">
+          <a class="btn" (click)="onDelete(job.payload.doc.id)">
             <i class="fa fa-trash"></i>
           </a>
         </td>

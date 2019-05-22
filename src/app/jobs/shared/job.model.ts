@@ -1,5 +1,5 @@
 export class Job {
-    $key : string;
+    $id : string;
     title : string;
     description : string;
     salary: number;

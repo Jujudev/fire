@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { JobService } from '../shared/job.service';
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { DatePipe } from '@angular/common';
+import { Job } from '../shared/job.model';
+
 
 @Component({
   selector: 'app-job',
@@ -14,19 +15,23 @@ export class JobComponent implements OnInit {
   constructor(private jobService : JobService, private tostr : ToastrService) { }
 
   ngOnInit() {
-    this.jobService.getData();
+    this.jobService.getJobs();
     this.resetForm();
   }
 
-  onSubmit(jobForm : NgForm)
+  onSubmit(value, jobForm : NgForm)
   {
-    if(jobForm.value.$key == null)
+    console.log('selectedjob:',this.jobService.selectedJob);
+    if(value.id == null)
     {
-      this.jobService.insertJob(jobForm.value);
+      console.log('insert new job');
+      this.jobService.insertJob(value);
     }
     else
     {
-      this.jobService.updateJob(jobForm.value);
+      console.log('update job');
+
+      this.jobService.updateJob(value.id, value);
     }
       this.resetForm(jobForm);
       this.tostr.success('Job sumitted successfully', 'Job Register');
@@ -37,13 +42,11 @@ export class JobComponent implements OnInit {
     if(jobForm != null)
       jobForm.reset();
     this.jobService.selectedJob = {
-      $key : null,
+      $id : null,
       title : '',
       description : '',
       salary: 0,
       publishDate: new Date(Date.now())
     }
   }
-
-
 }

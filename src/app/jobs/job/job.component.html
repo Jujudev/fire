@@ -1,5 +1,5 @@
-  <form #jobForm = "ngForm" (ngSubmit)="onSubmit(jobForm)">
-    <input type="hidden" name="$key" #key="ngModel" [(ngModel)]="jobService.selectedJob.$key"> 
+  <form #jobForm = "ngForm" (ngSubmit)="onSubmit(jobForm.value, jobForm)">
+    <input  name="id" #id="ngModel" [(ngModel)]="jobService.selectedJob.$id"> 
     <div class="form-group">
       <label>Title</label>
       <input class="form-control" name="title" #name="ngModel" [(ngModel)]="jobService.selectedJob.title" placeholder="Title" required />
