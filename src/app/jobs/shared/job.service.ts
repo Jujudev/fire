@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Job } from './job.model';
+import { Job } from '../../models/job.model';
 
 @Injectable({
   providedIn: 'root'
@@ -29,9 +29,11 @@ export class JobService {
   }
 
   searchJob(searchValue){
-    return this.db.collection(this.basePath,ref => ref.where('titleToSearch', '>=', searchValue)
-      .where('titleToSearch', '<=', searchValue + '\uf8ff'))
-      .snapshotChanges()
+    return this.db.collection(this.basePath, ref => ref.where("title", "array-contains", searchValue)).snapshotChanges();
+  }
+
+  searchJobsByCity(searchValue){
+    return this.db.collection(this.basePath, ref => ref.where("city", "array-contains", searchValue)).snapshotChanges();
   }
   
   insertJob(job){
@@ -39,7 +41,20 @@ export class JobService {
       title : job.title,
       description : job.description,
       salary: job.salary,
-      publishDate : Date.now()
+      publishDate : Date.now(),
+      company : job.company,
+      contractType: job.contractType
     });
   }
 }
+
+/*etCollection$(): Observable<Post[]> {
+  return this.afs.collection<Post>()
+    .snapshotChanges().map(actions => {
+      return actions.map(a => {
+        const data = a.payload.doc.data() as Post;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      });
+    });
+} */

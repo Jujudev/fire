@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { JobService } from '../shared/job.service';
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { Job } from '../shared/job.model';
+import { Job } from '../../models/job.model';
 
 
 @Component({
@@ -44,8 +44,13 @@ export class JobComponent implements OnInit {
     this.jobService.selectedJob = {
       $id : null,
       title : '',
-      description : '',
+      description1 : '',
+      description2 : '',
       salary: 0,
+      city: '',
+      country: '',
+      company: [],
+      contractType: '',
       publishDate: new Date(Date.now())
     }
   }

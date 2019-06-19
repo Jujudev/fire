@@ -1,0 +1,99 @@
+<div class="intro jobs-intro" ui-view="" style="background-image: url(assets/img/jobs/bg1.jpg); background-position: -10 center;">
+	<div class="dtable hw100">
+		<div class="dtable-cell hw100">
+			<div class="container text-center" >
+				<!--<h1 class="intro-title" style ="color:#149078;"><b>Votre avenir au bout du
+					clic</b></h1>-->
+
+				<p class="sub animateme fittext3 animated fadeIn" style ="color:black">
+					Plus de 10 000 offres d'emploi au <b>Sénégal</b>
+				</p>
+
+				<div class="row search-row animated fadeInUp">
+					<div class="col-lg-4 col-sm-4 search-col relative locationicon">
+							<i class="icon-location-2 icon-append"></i> 
+							<input type="text" class="form-control" [(ngModel)]="searchCityValue" id="autocomplete-ajax" [ngModelOptions]="{standalone: true}" placeholder="Région ou Département" (keyup)="searchByCity()" class="form-control locinput input-rel searchtag-input has-icon">
+					</div>
+					<div class="col-lg-4 col-sm-4 search-col relative">
+						<i class="icon-docs icon-append"></i> 
+						<input type="text" class="form-control" [(ngModel)]="searchTitleValue" id="autocomplete-ajax" [ngModelOptions]="{standalone: true}" placeholder="Titre, Mots-clés ou Compagnie" (keyup)="searchByTitle()" class="form-control has-icon">
+					</div>
+					<div class="col-lg-4 col-sm-4 search-col">
+					 <a ui-sref= "job-offers({query: vm.queryText})">
+					 	<button class="btn btn-primary btn-search btn-block">
+								<i class="icon-search"></i><strong>Rechercher</strong>
+						</button>
+					</a>
+					</div>
+				</div>
+
+<!-- 				<div class="resume-up">
+					<a  style ="color:black"><i class="icon-doc-4"></i></a> <a style ="color:black"><b>Téléchargez votre CV et gérez facilement vos candidatures</b></a>
+				</div> -->
+
+			</div>
+		</div>
+	</div>
+</div>
+<!-- /.intro -->
+
+<div class="main-container">
+	<div class="container">
+		<div style="clear: both"></div>
+		<div class="row">
+			<div class="col-sm-9 page-content col-thin-right">
+				<div class="content-box col-lg-12">
+
+					<div class="row row-featured row-featured-category">
+
+								<ul>
+									<li class="list-group-item" *ngFor="let job of jobList | async">
+										<app-job-item [job]=job></app-job-item>
+									</li>
+								</ul>
+
+						<div class="tab-box  save-search-bar text-center">
+							<a class="text-uppercase" [routerLink]="['jobs']" [queryParams]="{q: '\*'}"><i
+								class=" icon-briefcase "></i> Afficher toutes les offres</a>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			<div class="col-sm-3 page-sidebar col-thin-left">
+				<aside>
+					<div class="inner-box no-padding">
+						<div class="inner-box-content">
+							<a href="#"><img class="img-responsive"
+								src="assets/img/site/app.jpg" alt="tv"></a>
+						</div>
+					</div>
+					<div class="inner-box">
+						<h2 class="title-2">Offres par Secteur</h2>
+
+						<div class="inner-box-content">
+							<ul class="cat-list arrow">
+								<li><a href="job-list.html">Engineering jobs <span
+										class="count">12,578</span>
+								</a></li>
+								<li><a href="job-list.html">Estate Agency jobs <span
+										class="count">4,546</span>
+								</a></li>
+								<li><a href="job-list.html">Financial Services jobs <span
+										class="count">9,115</span></a></li>
+								<li><a href="job-list.html">Banking jobs <span
+										class="count">1,468</span></a></li>
+							</ul>
+						</div>
+					</div>
+
+					<div class="inner-box no-padding">
+						<img class="img-responsive" src="assets/img/add2.jpg" alt="">
+					</div>
+				</aside>
+			</div>
+		</div>
+
+	</div>
+</div>

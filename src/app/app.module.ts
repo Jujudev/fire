@@ -15,7 +15,15 @@ import { JobComponent } from './jobs/job/job.component';
 import { JobListComponent } from './jobs/job-list/job-list.component';
 import { FormsModule } from '@angular/forms'; 
 import { ToastrModule } from 'ngx-toastr';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HeaderComponent } from './header/header.component';
+import { HomeComponent } from './home/home.component';
+import { JobItemComponent } from './jobs/job-item/job-item.component';
+import { JobDetailComponent } from './jobs/job-detail/job-detail.component'
+
+import { JobDetailResolver } from './jobs/job-detail/job-detail.resolver';
+import { JobItemResultComponent } from './jobs/job-item-result/job-item-result.component';
+
 
 
 @NgModule({
@@ -23,7 +31,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
     AppComponent,
     JobsComponent,
     JobComponent,
-    JobListComponent
+    JobListComponent,
+    HeaderComponent,
+    HomeComponent,
+    JobItemComponent,
+    JobDetailComponent,
+    JobItemResultComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +49,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
     ToastrModule.forRoot(),
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [JobDetailResolver],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

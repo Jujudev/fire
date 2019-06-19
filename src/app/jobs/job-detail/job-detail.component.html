@@ -1,0 +1,102 @@
+<div id="wrapper">
+    <div class="main-container">
+        <div class="container">
+            <ol class="breadcrumb pull-left">
+                <li><a class="breadcrumb-link" href="#"><i class="icon-home fa"></i></a></li>
+                <li><a class="breadcrumb-link" href="#job-offers?query=*"> Jobs </a></li>
+                <li class="breadcrumb-link-active">Domain</li>
+                <!---<li class="active">{{job?.domain}}</li>-->
+            </ol>
+            <div class="pull-right backtolist"><a href="jobs"> <i class="fa fa-angle-double-left"></i> Retour à la liste</a></div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-9 page-content col-thin-right">
+                    <div class="inner inner-box ads-details-wrapper">
+                        <h3 class="job-title-detail">{{job?.title}}</h3>
+                        <span class="info-row"> <span class="date"><i class=" icon-clock"> </i> {{job?.publishDate | date:'medium'}} </span>  </span>
+
+                        <div class="Ads-Details ">
+                            <div class="row">
+                                <div class="ads-details-info jobs-details-info col-md-8">
+                                    <p>{{job?.description1}}</p>
+                                    <p>{{job?.description2}}</p>
+                                </div>
+                                <br/>
+                                <div class="col-md-4">
+                                    <aside class="panel panel-body panel-details job-summery">
+                                        <ul>
+                                            <li><p class=" no-margin "><strong>Compagnie:</strong> {{job?.company[1]}} </p></li>
+                                            <li>
+                                                <p class=" no-margin "><strong>Salaire:</strong> {{job?.salary}} {{job?.currency}}</p>
+                                            </li>
+                                            <li>
+                                                <p class="no-margin"><strong>Type de Contrat:</strong> {{job?.contractType}}</p>
+                                            </li>
+                                            <li>
+                                                <p class="no-margin"><strong>Lieu:</strong> {{job.city}}, {{job.country}} </p>
+                                            </li>
+                                            <li>
+                                                    <p class="no-margin"><strong>Email:</strong> {{job?.applicationEmail}} </p>
+                                            </li>
+                                        </ul>
+                                    </aside>
+                                    <div class="ads-action">
+                                        <ul class="list-border">
+                                            <li><a href="#"> <i class=" fa icon-mail"></i>Email</a></li>
+                                            <li><a href="#"> <i class=" fa fa-heart"></i>Sauvegarder</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="content-footer text-left">
+                                <a href="#applyOnline" data-toggle="modal" class="btn  btn-primary"> <i class=" icon-mail-2"></i> Postuler en ligne </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/.ads-details-wrapper-->
+
+                </div>
+                <!--/.page-content-->
+
+                <div class="col-sm-3  page-sidebar-right">
+                    <aside>
+                       <!-- 
+                        <div class="panel sidebar-panel panel-contact-seller">
+                            <div class="panel-heading">Employeur</div>
+                            <div class="panel-content user-info">
+                                <div class="panel-body text-center">
+                                    <div class="seller-info">
+                                        <div class="company-logo-thumb">
+                                            <a><img alt="img" class="img-responsive img-circle" src="images/jobs/company-logos/17.jpg"> </a></div>
+                                        <h3 class="no-margin"> {{job?.company.name}}</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                                                
+                        -->
+                        <div class="panel sidebar-panel">
+                            <div class="panel-heading"><i class="icon-lamp"></i> Successful CV Tips</div>
+                            <div class="panel-content">
+                                <div class="panel-body text-left">
+                                    <ul class="list-check">
+                                        <li> Tailor a CV to a specific job</li>
+                                        <li> Keep it simple</li>
+                                        <li> Include key information - personal details</li>
+                                        <li> Showcase achievements</li>
+                                    </ul>
+                                    <p><a class="pull-right" href="#"> Know more <i
+                                            class="fa fa-angle-double-right"></i> </a></p>
+                                </div>
+                            </div>
+                        </div>                        
+                        <!--/.categories-list-->
+                    </aside>
+                </div>
+                <!--/.page-side-bar-->
+            </div>
+        </div>
+    </div>
+    <!-- /.main-container -->
+</div>
+<!-- /.wrapper -->

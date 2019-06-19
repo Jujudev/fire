@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { JobService } from '../shared/job.service';
-import { Job } from '../shared/job.model';
-import { ToastrService } from 'ngx-toastr';
-import { DocumentChangeAction } from '@angular/fire/firestore';
+import { Job } from '../../models/job.model';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-job-list',
@@ -10,38 +11,22 @@ import { DocumentChangeAction } from '@angular/fire/firestore';
   styleUrls: ['./job-list.component.scss']
 })
 export class JobListComponent implements OnInit {
-  jobList : Array<any>;
+  jobList : Observable<any> = new Observable<any>();
+  jobsCount : number = 0;
 
-  constructor(private jobService : JobService, private tostr : ToastrService) { }
+  constructor(private jobService : JobService) { }
 
   ngOnInit() {
-    this.jobService.getJobs()
-    .subscribe(result => {
-      this.jobList = result;
-    });
-  }
-
-  onEdit(job : Job, id : string){
-    console.info('Editing job...', id)
-    this.jobService.selectedJob = Object.assign({}, job);
-    this.jobService.selectedJob.$id = id;
-  }
-
-  onDelete(key : string) {
-    if(confirm('Are you sure you want to delete this record ?') == true)
-    {
-      this.jobService.deleteJob(key);
-      this.tostr.warning("Job has been deleted successfully", "Job Register");
-    }
-  }
-
-  getWrappedResult(result : DocumentChangeAction<{}>[])
-  {
-    result.forEach(element => {
-      var y = element.payload.doc.data();
-      y["id"] = element.payload.doc.id;
-      
-      this.jobList.push(y as Job);
-    })
+    console.info('loading jobs');
+    this.jobList = this.jobService.getJobs().pipe(
+      map(changes => {
+          return changes.map(a => {
+            const data = a.payload.doc.data() as Job;
+            data.$id = a.payload.doc.id;
+            this.jobsCount++;
+            return data;
+          }
+        )
+      }));
   }
 }

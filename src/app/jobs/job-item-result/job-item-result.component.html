@@ -1,0 +1,36 @@
+<div class="item-list job-item">
+  <div class="col-sm-10  col-xs-10  add-desc-box">
+      <div class="add-details jobs-item">
+          <h5 class="company-title-job-item">{{job.company[1]}}</h5>
+          <h4 class="job-title"><a [routerLink]="['/jobs',job.$id]"> {{job.title}} </a></h4>
+
+          <span class="info-row"> 
+            <span class="item-location"><i class="fa fa-map-marker"></i> {{job.city}}, {{job.country}} </span> 
+            <span class="date"> <i class="icon-clock"></i>{{job.publishDate | date:'dd/MM/yyyy'}}</span>
+         </span> 
+          
+          <div class="jobs-desc">
+              {{ job.description1 | slice:0:220}} ...
+          </div>
+
+          <div class="job-actions">
+              <ul class="list-unstyled list-inline">
+                  <li>
+                      <a href="#" class="save-job">
+                          <span class="fa fa-star-o"></span>
+                          Save Job
+                      </a>
+                  </li>
+                  <li>
+                      <a class="email-job" href="#">
+                          <i class="fa fa-envelope"></i>
+                          Email Job
+                      </a>
+                  </li>
+              </ul>
+          </div>
+      </div>
+  </div>
+  <!--/.add-desc-box-->
+</div>
+<!--/.job-item-->
