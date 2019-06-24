@@ -1,0 +1,58 @@
+<div id="wrapper">
+  <!-- /.header -->
+  <!-- /.search-row -->
+  <div class="main-container">
+      <div class="container">
+          <div class="row">
+              <div class="col-sm-9 page-content col-thin-left">
+                  <div class="category-list">
+                      <div class="tab-box clearfix ">
+                          <!-- Nav tabs -->
+                          <div class="col-lg-12  box-title no-border">
+                              <div class="inner">
+                                  <h2>
+                                      <small> {{jobsCount}} offres trouvés</small>
+                                  </h2>
+                              </div>
+                          </div>
+                          <!-- Mobile Filter bar -->
+
+
+                      </div>
+                      <!--/.tab-box-->
+                      
+                      <div class="adds-wrapper jobs-list">
+
+                      <ul>
+                          <li class="list-group-item" *ngFor="let job of jobList | async">
+                            <app-job-item-result [job]=job></app-job-item-result>
+                          </li>
+                      </ul>
+                      </div>
+                      <!--/.adds-wrapper-->
+
+                      <div class="tab-box  save-search-bar text-center"><a href=""> <i class=" icon-star-empty"></i>
+                          Save Search </a></div>
+                  </div>
+                  <div class="pagination-bar text-center">
+                      <ul class="pagination">
+                          <li class="active"><a href="#">1</a></li>
+                          <li><a href="#">2</a></li>
+                          <li><a href="#">3</a></li>
+                          <li><a href="#">4</a></li>
+                          <li><a href="#">5</a></li>
+                          <li><a href="#"> ...</a></li>
+                          <li><a class="pagination-btn" href="#">Next &raquo;</a></li>
+                      </ul>
+                  </div>
+                  <!--/.pagination-bar -->
+
+              </div>
+              <!--/.page-content-->
+
+          </div>
+      </div>
+  </div>
+  <!-- /.main-container -->
+</div>
+<!-- /.wrapper -->

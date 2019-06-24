@@ -23,6 +23,9 @@ import { JobDetailComponent } from './jobs/job-detail/job-detail.component'
 
 import { JobDetailResolver } from './jobs/job-detail/job-detail.resolver';
 import { JobItemResultComponent } from './jobs/job-item-result/job-item-result.component';
+import { JobSearchComponent } from './jobs/job-search/job-search.component';
+import { EmailComponent } from './authentification/email/email.component';
+import { SignupComponent } from './authentification/signup/signup.component';
 
 
 
@@ -36,7 +39,10 @@ import { JobItemResultComponent } from './jobs/job-item-result/job-item-result.c
     HomeComponent,
     JobItemComponent,
     JobDetailComponent,
-    JobItemResultComponent
+    JobItemResultComponent,
+    JobSearchComponent,
+    EmailComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,

@@ -28,12 +28,30 @@ export class JobService {
     return this.db.collection(this.basePath).snapshotChanges();
   }
 
+  getJobsByCityAndTitle(city, title)
+  {
+    if(!this.isValueNotNullOrEmpty(title) && !this.isValueNotNullOrEmpty(city))
+    {
+      return this.getJobs();
+    }
+    else if (this.isValueNotNullOrEmpty(title) && !this.isValueNotNullOrEmpty(city))
+    {
+      return this.searchJob(title);
+    }
+    else if (!this.isValueNotNullOrEmpty(title) && this.isValueNotNullOrEmpty(city))
+    {
+      return this.searchJobsByCity(city);
+    }
+
+    return this.db.collection(this.basePath, ref => ref.where("title", "==", title).where("city", "==", city)).snapshotChanges();
+  }
+
   searchJob(searchValue){
-    return this.db.collection(this.basePath, ref => ref.where("title", "array-contains", searchValue)).snapshotChanges();
+    return this.db.collection(this.basePath, ref => ref.where("title", "==", searchValue)).snapshotChanges();
   }
 
   searchJobsByCity(searchValue){
-    return this.db.collection(this.basePath, ref => ref.where("city", "array-contains", searchValue)).snapshotChanges();
+    return this.db.collection(this.basePath, ref => ref.where("city", "==", searchValue)).snapshotChanges();
   }
   
   insertJob(job){
@@ -46,15 +64,9 @@ export class JobService {
       contractType: job.contractType
     });
   }
-}
 
-/*etCollection$(): Observable<Post[]> {
-  return this.afs.collection<Post>()
-    .snapshotChanges().map(actions => {
-      return actions.map(a => {
-        const data = a.payload.doc.data() as Post;
-        const id = a.payload.doc.id;
-        return { id, ...data };
-      });
-    });
-} */
+  isValueNotNullOrEmpty(key : any)
+  {
+    return (typeof key!='undefined' && key);
+  }
+}

@@ -48,7 +48,10 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700); /* google webfont */
 @import url(http://fonts.googleapis.com/css?family=Roboto:100,200,300,400,500,600,700|Roboto+Condensed:300,400,700);
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800);
-@import url(https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic;)
+@import url(https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic;);
+@import url(https://fonts.googleapis.com/css?family=Poppins:400,300,300italic,400italic,700,700italic,900,900italic;);
+
+
 
 /* =============================================================== */
 /* FOUNDATION
@@ -123,7 +126,7 @@ body {
   margin: 0;
   padding: 0;
   color: #333;
-  font-family: Merriweather, Open Sans,Roboto, sans-serif;
+  font-family: Poppins, Open Sans,Roboto, sans-serif;
   font-size: 13px;
   line-height: 21px;
   position: relative;
@@ -138,7 +141,7 @@ body, html, #wrapper {
 /* =============================================================== */
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: Merriweather, Open Sans, Roboto Condensed, Helvetica Neue,  Helvetica, sans-serif ;
+  font-family: Poppins, Open Sans, Roboto Condensed, Helvetica Neue,  Helvetica, sans-serif ;
   font-weight: normal;
   margin: 0;
   padding-bottom: 15px;
@@ -186,7 +189,7 @@ h6 {
 }
 
 .title-5 {
-  font-family: Merriweather, Open Sans, Roboto, Helvetica, Arial, sans-serif;
+  font-family: Poppins, Open Sans, Roboto, Helvetica, Arial, sans-serif;
   border-bottom: 1px solid #ebebeb;
   color: #080808;
   font-size: 16px;
@@ -550,7 +553,7 @@ btn-post:hover, .btn-post:focus, .btn-post:active, .btn-post.active, .open .drop
 }
 
 .btn-post {
-  font-family: Merriweather, Open Sans, roboto condensed, Helvetica Neue, Helvetica, sans-serif;
+  font-family: Poppins, Open Sans, roboto condensed, Helvetica Neue, Helvetica, sans-serif;
   font-weight: normal;
   text-transform: uppercase;
 }
@@ -698,7 +701,7 @@ body {
 }
 
 .logo, .logo-title {
-  font-family: Merriweather, Open Sans Condensed, Helvetica Neue, sans-serif;
+  font-family: Poppins, Open Sans Condensed, Helvetica Neue, sans-serif;
   font-size: 28px;
   font-weight: bold;
   text-transform: uppercase;
@@ -731,7 +734,7 @@ body {
 
 .intro h1, .intro-title {
   color: #fff;
-  font-family: Montserrat, Roboto, Merriweather, Open Sans;
+  font-family: Montserrat, Roboto, Poppins, Open Sans;
   font-size: 38px;
   line-height: 70px;
   font-weight: bold;
@@ -939,7 +942,7 @@ button.btn-search {
 }
 
 .cat-list h3, .title-3 {
-  font-family: Merriweather, Open Sans Condensed, Helvetica Neue, sans-serif;
+  font-family: Poppins, Open Sans Condensed, Helvetica Neue, sans-serif;
   font-weight: bold;
   text-transform: uppercase;
 }
@@ -1068,7 +1071,7 @@ button.btn-search {
 .item-carousel .item-name {
   clear: both;
   display: block;
-  font-family: Merriweather, Open Sans, Roboto Condensed, Helvetica Neue,  Helvetica, sans-serif ;
+  font-family: Poppins, Open Sans, Roboto Condensed, Helvetica Neue,  Helvetica, sans-serif ;
   font-size: 14px;
   font-weight: normal;
   line-height: 16px;
@@ -1423,7 +1426,7 @@ button.btn-search {
 .cornerRibbons a {
   color: #fff;
   display: block;
-  font-family: Merriweather, Open Sans, Roboto Condensed, Helvetica, Arial, sans-serif;
+  font-family: Poppins, Open Sans, Roboto Condensed, Helvetica, Arial, sans-serif;
   font-size: 12px;
   font-weight: normal;
   text-align: center;
@@ -2351,7 +2354,7 @@ div.login-box .panel-footer label {
 
 .iconbox-wrap-text {
   color: #aaa;
-  font-family: Merriweather, Open Sans, Roboto Condensed;
+  font-family: Poppins, Open Sans, Roboto Condensed;
   font-size: 16px;
   text-transform: uppercase;
 }
@@ -2390,7 +2393,7 @@ div.login-box .panel-footer label {
 }
 
 .page-bottom-info-content h1 {
-  font-family: Merriweather, Open Sans, Roboto, sans-serif;
+  font-family: Poppins, Open Sans, Roboto, sans-serif;
   font-weight: 500;
   letter-spacing: 1px;
   margin-bottom: 15px;
@@ -2528,7 +2531,7 @@ div.login-box .panel-footer label {
   background: none repeat scroll 0 0 #ffffff;
 	/*border-bottom: 1px solid #e1e1e1;*/
   display: block;
-  font-family: Merriweather, Open Sans, Roboto Condensed, Arial;
+  font-family: Poppins, Open Sans, Roboto Condensed, Arial;
   color: #2a3744;
   font-size: 12px;
   height: auto;
@@ -2766,7 +2769,7 @@ td.ads-details-td {
 }
 
 .title-1 {
-  font-family: Merriweather, Open Sans, Roboto;
+  font-family: Poppins, Open Sans, Roboto;
   font-weight: 300;
   text-transform: uppercase;
 }
@@ -3569,7 +3572,7 @@ td.ads-details-td {
 
 .f-category h6 {
   color: #333;
-  font-family: Merriweather, Open Sans, Roboto,Helvetica,Arial,sans-serif;
+  font-family: Poppins, Open Sans, Roboto,Helvetica,Arial,sans-serif;
   font-size: 13px;
   font-weight: 500;
   letter-spacing: 0;
@@ -3651,7 +3654,7 @@ td.ads-details-td {
     display: block;
     line-height:  normal;
     color: #333;
-    font-family: Merriweather, Open Sans, Roboto,Helvetica,Arial,sans-serif;
+    font-family: Poppins, Open Sans, Roboto,Helvetica,Arial,sans-serif;
     font-size: 13px;
     font-weight: 500;
     letter-spacing: 0;
@@ -3911,7 +3914,7 @@ nav.slider-nav a.next {
 .tab-lite .nav-tabs > li > a {
     border: 0 none !important;
     border-radius: 0 !important;
-    font-family: Merriweather, Open Sans, Roboto Condensed,Helvetica Neue,Helvetica,sans-serif;
+    font-family: Poppins, Open Sans, Roboto Condensed,Helvetica Neue,Helvetica,sans-serif;
     font-size: 16px;
     font-weight: 400;
     line-height: normal;
@@ -4004,7 +4007,7 @@ nav.slider-nav a.next {
 }
 
 .jobs-intro {
-  height: 450px;
+  height: 350px;
 }
 
 .hasOverly > div {
@@ -4127,7 +4130,7 @@ nav.slider-nav a.next {
   border-bottom: 1px solid #ddd;
   height: 44px;
   line-height: 44px;
-  font-family: Merriweather, Open Sans,Roboto Condensed,Helvetica Neue,Helvetica,sans-serif;
+  font-family: Poppins, Open Sans,Roboto Condensed,Helvetica Neue,Helvetica,sans-serif;
 }
 
 .mobile-filter-bar > ul > li {
@@ -4450,7 +4453,7 @@ nav.slider-nav a.next {
   position: relative;
   display: block;
   padding-right: 130px;
-  font-family: Merriweather, Open Sans,Roboto, sans-serif;
+  font-family: Poppins, Open Sans,Roboto, sans-serif;
   font-weight: 700;
 }
 
@@ -4496,20 +4499,17 @@ nav.slider-nav a.next {
 .company-title-job-item{
   margin: 0;
   padding-bottom: 0;
-  /*color :#E31DBF;
-  color:#38B578;*/
   color:#0094af;
-  font-weight: bold;
   font-size: 13px;
 }
 
 .navbar-nav > li {
-  font-family: Merriweather, Roboto, Open Sans, sans-serif;
+  font-family: Poppins, Roboto, Open Sans, sans-serif;
   font-size: 16px;
 }
 
 .jobs-intro {
-  height: 380px;
+  height: 320px;
 }
 
 .jobs-details-info > p {
@@ -4544,6 +4544,7 @@ nav.slider-nav a.next {
   color: black;
   border: solid 0px red;
   width: 125%;
+  font-weight: lighter;
 }
 
 .jobs-item > h4, h5{
@@ -4562,6 +4563,14 @@ nav.slider-nav a.next {
 
 .breadcrumb-link{
   color: white;
+}
+
+.jobs-list-header {
+  padding-top: 0;
+  padding-bottom: 0;
+  height: 100px;
+  background-color: #34495E;
+  background-image: url(../../images/bg1.jpg);
 }
 
 .box-title {  

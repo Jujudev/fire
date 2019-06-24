@@ -4,6 +4,8 @@ import { HomeComponent} from './home/home.component';
 import { JobListComponent} from './jobs/job-list/job-list.component';
 import { JobDetailComponent } from './jobs/job-detail/job-detail.component';
 import { JobDetailResolver } from './jobs/job-detail/job-detail.resolver';
+import { JobSearchResultResolver } from './jobs/job-list/job-search-result.resolver';
+import { JobSearchComponent } from './jobs/job-search/job-search.component';
 
 const routes: Routes = [
   

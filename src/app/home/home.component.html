@@ -1,4 +1,4 @@
-<div class="intro jobs-intro" ui-view="" style="background-image: url(assets/img/jobs/bg1.jpg); background-position: -10 center;">
+<div class="intro jobs-intro" ui-view="" style="background-image: url(assets/img/jobs/bg3.png); background-position: -10 center;">
 	<div class="dtable hw100">
 		<div class="dtable-cell hw100">
 			<div class="container text-center" >
@@ -12,18 +12,18 @@
 				<div class="row search-row animated fadeInUp">
 					<div class="col-lg-4 col-sm-4 search-col relative locationicon">
 							<i class="icon-location-2 icon-append"></i> 
-							<input type="text" class="form-control" [(ngModel)]="searchCityValue" id="autocomplete-ajax" [ngModelOptions]="{standalone: true}" placeholder="Région ou Département" (keyup)="searchByCity()" class="form-control locinput input-rel searchtag-input has-icon">
+							<input type="text" class="form-control" [(ngModel)]="searchCityValue" id="autocomplete-ajax" [ngModelOptions]="{standalone: true}" placeholder="Région ou Département"  class="form-control locinput input-rel searchtag-input has-icon">
 					</div>
 					<div class="col-lg-4 col-sm-4 search-col relative">
 						<i class="icon-docs icon-append"></i> 
-						<input type="text" class="form-control" [(ngModel)]="searchTitleValue" id="autocomplete-ajax" [ngModelOptions]="{standalone: true}" placeholder="Titre, Mots-clés ou Compagnie" (keyup)="searchByTitle()" class="form-control has-icon">
+						<input type="text" class="form-control" [(ngModel)]="searchKeyValue" id="autocomplete-ajax" [ngModelOptions]="{standalone: true}" placeholder="Titre, Mots-clés ou Compagnie"  class="form-control has-icon">
 					</div>
 					<div class="col-lg-4 col-sm-4 search-col">
-					 <a ui-sref= "job-offers({query: vm.queryText})">
-					 	<button class="btn btn-primary btn-search btn-block">
-								<i class="icon-search"></i><strong>Rechercher</strong>
-						</button>
-					</a>
+						<a ui-sref= "job-offers({query: vm.queryText})">
+							<button class="btn btn-primary btn-search btn-block" (click)="onSearchClick()">
+									<i class="icon-search"></i><strong>Rechercher</strong>
+							</button>
+						</a>
 					</div>
 				</div>
 

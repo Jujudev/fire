@@ -3,6 +3,7 @@ import { JobService } from '../jobs/shared/job.service';
 import { Job } from '../models/job.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -12,15 +13,16 @@ import { map } from 'rxjs/operators';
 export class HomeComponent implements OnInit {
   jobList : Observable<any> = new Observable<any>();
   searchCityValue: string = "";
-  searchTitleValue: string = "";
+  searchKeyValue: string = "";
 
   items: Array<any>;
   age_filtered_items: Array<any>;
   name_filtered_items: Array<any>;
 
-  constructor(private jobService : JobService) { }
+  constructor(private jobService : JobService, private router: Router) { }
 
   ngOnInit() {
+    
     console.info('loading jobs');
     this.jobList = this.jobService.getJobs().pipe(
       map(changes => {
@@ -36,7 +38,7 @@ export class HomeComponent implements OnInit {
       }));
   }
   searchByTitle(){
-    let value = this.searchTitleValue.toLowerCase();
+    let value = this.searchKeyValue.toLowerCase();
     this.jobService.searchJob(value)
     .subscribe(result => {
       this.name_filtered_items = result;
@@ -68,4 +70,10 @@ export class HomeComponent implements OnInit {
     return result;
   }
 
+  onSearchClick()
+  {
+    this.router.navigate(['jobs'], {
+      queryParams: {'city' : this.searchCityValue, 'key' : this.searchKeyValue}
+    });
+  }
 }

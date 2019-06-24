@@ -3,6 +3,8 @@ import { JobService } from '../shared/job.service';
 import { Job } from '../../models/job.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { ActivatedRoute } from "@angular/router";
+
 
 
 @Component({
@@ -14,19 +16,23 @@ export class JobListComponent implements OnInit {
   jobList : Observable<any> = new Observable<any>();
   jobsCount : number = 0;
 
-  constructor(private jobService : JobService) { }
+  constructor(private jobService : JobService, private route: ActivatedRoute) {
+   }
+   
 
   ngOnInit() {
-    console.info('loading jobs');
-    this.jobList = this.jobService.getJobs().pipe(
-      map(changes => {
-          return changes.map(a => {
-            const data = a.payload.doc.data() as Job;
-            data.$id = a.payload.doc.id;
-            this.jobsCount++;
-            return data;
-          }
-        )
-      }));
+    this.route.queryParams.subscribe( (c) => {
+      this.jobList = this.jobService.getJobsByCityAndTitle(c['city'], c['key']).pipe(
+        map(changes => {
+            return changes.map(a => {
+              const data = a.payload.doc.data() as Job;
+              data.$id = a.payload.doc.id;
+              this.jobsCount++;
+              return data;
+            }
+          )
+        }));
+  });
+
   }
 }
