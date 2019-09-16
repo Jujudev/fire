@@ -1,0 +1,73 @@
+#lock {
+    width: 40%;
+    margin: 1.5em auto 4em auto;
+    display: block;    
+}
+
+#fb {
+    background: #3B5998 url('../../../assets/img/facebook.png') no-repeat 14px 6px;
+    background-size: 47px;
+    color: #fff;
+    border-width: 0px;
+}
+
+#google {
+    border: 1px solid #95989A;
+    background: #fff url('../../../assets/img/google.png') no-repeat 25px;
+    background-size: 25px;
+}
+
+#email {
+    background: #ececec url('../../../assets/img/email.png') no-repeat 25px;
+    background-size: 25px;
+    border-width: 0px;
+}
+
+.basic-btn {
+    border-width: 0;
+    background-color: #149078;
+}
+
+@media (max-width:600px) {
+
+    #page {
+        padding: 1em;
+    }
+    #toolbar {
+        width:90%;
+        margin-left: -45%; 
+    }
+    #fb {
+        background: #3B5998
+    }
+
+    #google {
+        background: #fff;
+    }
+
+    #email {
+        background: #ECECEC;
+    }
+}
+
+.login-container {
+    width: 100%;
+    padding: 80px;
+    margin: auto;
+    border:solid 0px;
+    text-align: center;
+    background-image: url('../../../assets/img/jobs/bg3.png')  ;
+    background-position: center;
+    background-size: 100%;
+}
+
+.login-container p{
+    font-size: 16px;
+}
+
+.form-container {
+    border: solid 1px whitesmoke;
+    box-shadow: 8px 8px 12px #aaa;
+}
+
+

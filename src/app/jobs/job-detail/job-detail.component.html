@@ -1,3 +1,4 @@
+<app-header></app-header>
 <div id="wrapper">
     <div class="main-container">
         <div class="container">
@@ -26,7 +27,7 @@
                                 <div class="col-md-4">
                                     <aside class="panel panel-body panel-details job-summery">
                                         <ul>
-                                            <li><p class=" no-margin "><strong>Compagnie:</strong> {{job?.company[1]}} </p></li>
+                                            <li><p class=" no-margin "><strong>Compagnie:</strong> {{job?.companyName}} </p></li>
                                             <li>
                                                 <p class=" no-margin "><strong>Salaire:</strong> {{job?.salary}} {{job?.currency}}</p>
                                             </li>
@@ -50,7 +51,7 @@
                                 </div>
                             </div>
                             <div class="content-footer text-left">
-                                <a href="#applyOnline" data-toggle="modal" class="btn  btn-primary"> <i class=" icon-mail-2"></i> Postuler en ligne </a>
+                                <button (click)="sendEmail()" id="btnSendEmail" class="btn  btn-primary"><i class=" icon-mail-2"></i> Postuler en ligne</button><br>
                             </div>
                         </div>
                     </div>
@@ -75,6 +76,26 @@
                             </div>
                         </div>                                                
                         -->
+                        <div class="panel sidebar-panel panel-contact-seller">
+                            <div class="panel-heading">Company Information</div>
+                            <div class="panel-content user-info">
+                                <div class="panel-body text-center">
+                                    <div class="seller-info">
+                                        <div class="company-logo-thumb">
+                                            <!-- <a><img alt="img" class="img-responsive img-circle"
+                                                    src="images/jobs/company-logos/17.jpg"> </a>
+                                            -->
+                                        </div>
+                                        <h3 class="no-margin"> Data Systems Ltd</h3>
+
+                                        <p>Location: <strong>New York</strong></p>
+
+                                        <p> Web: <strong>www.demoweb.com</strong></p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
                         <div class="panel sidebar-panel">
                             <div class="panel-heading"><i class="icon-lamp"></i> Successful CV Tips</div>
                             <div class="panel-content">

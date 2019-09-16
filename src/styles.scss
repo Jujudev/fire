@@ -1,4 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+
 input.ng-invalid.ng-dirty
 {
     border: 1px solid red;
@@ -7,3 +10,83 @@ input.ng-invalid.ng-dirty
 button:hover,a.btn:hover{
     cursor: pointer;
 }
+
+.form-container {
+    background: white;
+    padding:3.5em;
+    width:500px;
+    margin: auto;
+}
+
+button {
+    padding: 1.2em;
+    width:100%;
+    cursor: pointer;
+    margin-bottom: 15px;
+    font-size: 1.3em;
+}
+
+.basic-btn {
+    background: #3B8598;
+    color:white;
+}
+
+input.txt {
+    background:  #fff !important;
+    padding: 1.3em 1em;
+    border: 1px solid #bbbbbb;
+}
+
+
+
+.alc {
+    text-align: center;
+    display: block;
+    margin: 15px 0;
+}
+
+.error {
+    background: #f1f0ef;
+    padding: 1em;
+    width: 100%;
+    display: block;
+    margin-bottom:20px; 
+}
+
+#goback {
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: .8em;
+    color:#3B8598;
+}
+
+#goback span {
+    font-size: 1em;
+}
+
+.loading {
+    width: 30px;
+    height: 30px;
+    border:5px solid #ccc;
+    position: fixed;
+    left: 50%;
+    margin-left: -20px;
+    top: 50%;
+    margin-top: -20px;
+    border-radius: 50%;
+}
+
+.loadings {
+    content: '';
+    position: absolute;
+    width:  40px;
+    height: 10px;
+    background: #E2E4E6;
+    top: 10px;
+    left: -5px;
+    animation: spin 1.2s infinite;
+}
+
+
+
+

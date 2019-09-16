@@ -1,0 +1,30 @@
+<div class="login-container">
+  <br/>
+  <p class="sub animateme fittext3 animated fadeIn" style ="color:black">
+     Vous etes une entreprise ? Connectez vous à votre espace <b>Entreprise</b>
+  </p>
+  <br/>
+
+<div class="form-container">
+  <a [routerLink]="['']">
+    <img alt="AmJob" src="assets/img/logo-amjob.png" width="160px"/>
+  </a>
+<br/><br/>
+<span class="error" *ngIf="error">{{ error }}</span>
+<div>
+  <!-- Default form subscription -->
+<form class="text-center border border-light p-5" #formData='ngForm' (ngSubmit)="onSubmit(formData)">
+  <!-- Email -->
+  <input type="email" id="txtemail"(ngModel)="email" name="email" required  class="form-control mb-4" placeholder="Company E-mail">
+<br/>
+  <!-- Password -->
+  <input type="password" id="txtpassword" class="form-control mb-4" placeholder="Password" required (ngModel)="password" name="password">
+<br/>
+  <!-- Sign in button -->
+  <button mdbBtn color="info" block="true" type="submit"  [disabled]="!formData.valid" class="basic-btn">Se connecter</button>
+</form>
+<!-- Default form subscription -->
+</div>
+<a routerLink="/company-signup" routerLinkActive="active" class="alc">Créer un compte <strong> Entreprise</strong></a>
+</div>
+</div>

@@ -1,5 +1,11 @@
+import * as firebase from 'firebase/app';
+
 export class Company {
-    $id : string;
+    uid : string;
+    email: string;
     name: string;
-    registeremail: string;
+    city: string;
+    country: string;
+    jobemail: string;
+    isVerified: boolean;
 }

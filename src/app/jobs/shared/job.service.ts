@@ -1,12 +1,18 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Job } from '../../models/job.model';
+import { Company } from 'src/app/models/company.model';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class JobService {
+
+  getCompanyJobs() {
+    return this.db.collection(this.basePath).snapshotChanges();
+  } 
+
   private basePath : string = 'jobs';
   selectedJob: Job = new Job();
 
@@ -15,6 +21,10 @@ export class JobService {
   getJob(jobKey){
     return this.db.collection(this.basePath).doc(jobKey).snapshotChanges();
   }
+
+  getCompany(companyKey : string) {
+    return this.db.collection('companies').doc(companyKey).snapshotChanges();
+}
 
   updateJob(jobKey, value){
     return this.db.collection(this.basePath).doc(jobKey).set(value);
@@ -57,10 +67,10 @@ export class JobService {
   insertJob(job){
     return this.db.collection(this.basePath).add({
       title : job.title,
-      description : job.description,
+      description1 : job.description1,
+      description2 : job.description2,
       salary: job.salary,
       publishDate : Date.now(),
-      company : job.company,
       contractType: job.contractType
     });
   }

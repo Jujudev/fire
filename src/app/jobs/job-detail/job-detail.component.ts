@@ -3,6 +3,7 @@ import { JobService } from '../shared/job.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { Job } from 'src/app/models/job.model';
+import { EmailServiceService } from 'src/app/shared/email-service.service';
 
 @Component({
   selector: 'app-job-detail',
@@ -12,7 +13,7 @@ import { Job } from 'src/app/models/job.model';
 export class JobDetailComponent implements OnInit {
  
   job:any;
-  constructor(private jobService : JobService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private jobService : JobService, private route: ActivatedRoute, private router: Router, private emailService : EmailServiceService) { }
 
   ngOnInit() {
     this.route.data.subscribe(routeData => {
@@ -23,6 +24,11 @@ export class JobDetailComponent implements OnInit {
         console.info('hello', this.job);
       }
     })
+  }
+
+  sendEmail()
+  {
+    this.emailService.SendEmail();
   }
 
 }

@@ -10,5 +10,6 @@ export class Job {
     city: string;
     country: string;
     contractType: string;
-    company: Array<string>;
+    companyId : number;
+    companyName: string;
 }

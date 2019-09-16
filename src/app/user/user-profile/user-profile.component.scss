@@ -1,0 +1,194 @@
+.imgProfile1 {
+    border-radius: 5px;
+    width: 148px;
+    height: 118px;
+    box-shadow: 1px 1px 8px #aaa;
+}
+
+.imgProfile2 {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 0px solid #1FC8DB;
+    box-shadow: 1px 1px 8px #aaa;
+    /*filter: grayscale(100%);
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+    -o-filter: grayscale(100%);*/
+}
+
+.sectionHeader {
+    width: 100%;
+    padding:5px;
+    margin-top: 10px;
+    height: 50px;
+    font-size: 1.5em;
+    border-radius: 2px;
+}
+
+.sectionIntro {
+    /*background-color: #1FC8DB;*/
+    background-color: #149078;
+    /*background-color: #369;*/
+    color: white;
+    width: 99.5%;
+    padding:15px;
+    margin-bottom: 10px;
+    height: 150px;
+    font-size: 1em;
+    border-radius: 2px;
+    box-shadow: 1px 1px 8px #aaa;
+    /*background-image: linear-gradient(141deg, black 0%, #1fc8db 51%, #2cb5e8 75%);*/
+}
+
+.sectionProfile{
+    border:solid 0.02em whitesmoke;
+    height: 100%;
+    width: 49%;
+    float: left;
+    box-shadow: 1px 1px 4px #aaa;
+    padding: 10px;
+    background-color: white;
+    border-radius: 2px;
+}
+
+.marginLeft{
+    margin-left: 15px;
+}
+
+.section1Profile {
+    border: solid 0px whitesmoke;
+    background-color: white;
+    height: 120px; width: 150px;float: left;margin: 10px;
+    border-radius: 2px;
+}
+
+.section11Profile {
+    border: solid 0px whitesmoke;
+    height: 120px;
+    width: 150px;
+    float: left;
+    margin-top: -32px;
+}
+
+.section2Profile {
+    height: 100px;
+    margin: 0 0 15px 0;
+    border-radius: 2px;  
+}
+
+.sectionExperience {
+    height: 100%;
+    margin: 25px 0 25px 0;
+    border-radius: 2px;  
+    border:solid 1px lightgrey;
+    box-shadow: 1px 1px 8px #aaa;
+    padding: 10px;
+    background-color: white;
+    width: 58%;
+    float: left;
+}
+
+.sectionFormation {
+    height: 100%;
+    margin: 25px 0 15px 16px;
+    border-radius: 2px;  
+    border:solid 1px lightgrey;
+    box-shadow: 1px 1px 8px #aaa;
+    padding: 10px;
+    background-color: white;
+    width: 40%;
+    float: left;
+}
+
+.sectionStats {
+    height: 100%;
+    margin: 0 0 15px 16px;
+    border:solid 0px lightgrey;
+    width: 40%;
+    float: left;
+}
+
+.section22Profile {
+    border:solid 0px lightgrey;
+    height: 100%;
+    width: 100%;
+    float: left;
+    box-shadow: 1px 1px 8px #aaa;
+    background-color: white;
+    color: black;
+    border-radius: 2px;
+}
+
+section {
+	border-top: 1px solid #dedede;
+	padding: 0px 0 0;
+}
+
+section:first-child {
+	border-top: 0;
+}
+
+section:last-child {
+	padding: 0;
+}
+
+.sectionTitle {
+	float: left;
+	width: 25%;
+}
+
+.sectionContent {
+    padding:15px;
+}
+
+.sectionContent h1 {
+	font-size: 1.5em;
+    color:#369;
+    font-weight: bold;
+    font-size: 22px;
+    line-height: 1em;
+}
+
+.sectionContent hr {
+    margin-top:-12px;
+}
+
+.sectionContent h2 {
+	font-size: 1em;
+    margin-bottom: -2px;
+    /*color:#0094af;*/
+    /*color:#149078;*/
+    line-height: 1em;
+    font-weight: bold;
+}
+
+.sectionContent h3 {
+	font-size: 1em;
+    /*color:#0094af;*/
+    color:#149078;
+    line-height: 1em;
+}
+
+.sectionContent .date {
+    color: gray;
+}
+
+.sectionContent p{
+    font-size: 1em;
+}
+
+.subDetails {
+	font-size: 0.8em;
+	font-style: italic;
+	margin-bottom: 3px;
+}
+
+.subDetailsFormation {
+	font-size: 0.8em;
+	font-style: italic;
+	margin-bottom: 20px;
+}
+
+.clear {clear: both;}

@@ -1,0 +1,34 @@
+#ngForm {
+    font-size: 14px;
+}
+
+.register-container {
+    width: 100%;
+    padding: 80px;
+    margin: auto;
+    border:solid 0px;
+    text-align: center;
+    background-image: url('../../../assets/img/jobs/bg3.png')  ;
+    background-position: center;
+    background-size: 100%;
+    font-size: 16px;
+}
+.form-container {
+    text-align: center;
+    border: solid 1px whitesmoke;
+    box-shadow: 8px 8px 12px #aaa;
+}
+
+.btnSignIn {
+    height: 60px;
+    text-align: center;
+    font-size: 14px;
+    background: #149078;
+    color: white;
+    border-width: 0;
+}
+
+.txtconditions {
+    text-align: left;
+    font-size: 12px;
+}

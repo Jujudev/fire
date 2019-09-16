@@ -1,0 +1,35 @@
+<div class="login-container">
+    <br/>
+    <p class="sub animateme fittext3 animated fadeIn" style ="color:black">
+        Veuillez vous connecter pour gérer votre <b>profil</b> et bénéficier des options attribuées aux <b>amjobers</b>
+    </p>
+    <br/>
+
+<div class="form-container">
+    <a [routerLink]="['/']">
+      <img alt="AmJob" src="assets/img/logo-amjob.png" width="160px"/>
+    </a>
+  <br/><br/>
+  <span class="error" *ngIf="error">{{ error }}</span>
+  <button (click)="loginFacebook()" id="fb">Login With Facebook</button><br>
+  <button (click)="loginGoogle()" id="google">Login With Google</button><br>
+  <button id="email">Email</button>
+  <div>
+    <!-- Default form subscription -->
+<form class="text-center border border-light p-5" #formData='ngForm' (ngSubmit)="onSubmit(formData)">
+    <!-- Email -->
+    <input type="email" id="txtemail"(ngModel)="email" name="email" required  class="form-control mb-4" placeholder="E-mail">
+  <br/>
+    <!-- Password -->
+    <input type="password" id="txtpassword" class="form-control mb-4" placeholder="Password" required (ngModel)="password" name="password">
+  <br/>
+    <!-- Sign in button -->
+    <button mdbBtn color="info" block="true" type="submit"  [disabled]="!formData.valid" class="basic-btn">Se connecter</button>
+  </form>
+  <!-- Default form subscription -->
+  </div>
+
+  <a routerLink="/signup" routerLinkActive="active" class="alc">Vous n'avez pas de compte? <strong> S'inscrire</strong></a>
+
+</div>
+</div>

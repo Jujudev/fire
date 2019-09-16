@@ -1,0 +1,111 @@
+
+<app-header></app-header>
+<div class="search-row-wrapper"  style="background-image: url(assets/img/bg3.jpg); background-size: cover; background-position: 60px center;"></div>
+<div id="wrapper">
+  <div class="main-container">
+      <div class="container">
+          <div class="row">
+              <div class="col-sm-3 page-sidebar mobile-filter-sidebar">
+                      <div class="inner-box">
+                            <div class="panel sidebar-panel panel-contact-seller" *ngIf="(authService.company$ | async)">
+                                    <div class="panel-content user-info">
+                                        <div class="panel-body text-center">
+                                            <div class="seller-info">
+                                                <div class="company-logo-thumb">
+                                                    <!-- <a><img alt="img" class="img-responsive img-circle"
+                                                            src="images/jobs/company-logos/17.jpg"> </a>
+                                                    -->
+                                                </div>
+                                                <h3 class="no-margin">{{data.name}}</h3>
+        
+                                                <strong>{{data.country}}</strong>
+        
+                                                <p>{{data.city}}</p>
+                                            </div>
+        
+                                        </div>
+                                    </div>
+                            </div>
+                      </div>
+              </div>
+              <div class="col-sm-9 page-content col-thin-left">
+                      <div class="tab-box">
+                        <mat-tab-group>
+                          <mat-tab label="Profile">
+                                <div class="panel-body-company-edit" *ngIf="(authService.company$ | async)">
+                                        <form class="form-horizontal" role="form" form id="companyForm" #companyForm = "ngForm" (ngSubmit)="onSubmit(companyForm.value, companyForm)">
+                                            <div class="form-group">
+                                                    <div class="col-sm-9" >
+                                                        <mat-form-field class="example-full-width">
+                                                                <input matInput name="name" #name="ngModel" [(ngModel)]="data.name" placeholder="Nom Compagnie" required />
+                                                        </mat-form-field>
+                                                    </div>
+                                            </div>
+     
+                                            <div class="form-group">
+                                                    <div class="col-sm-9">
+                                                            <mat-form-field class="example-full-width">
+                                                                <input matInput name="country" #country="ngModel"  [(ngModel)]="data.country" placeholder="Pays" required />
+                                                            </mat-form-field>
+                                                    </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-9">
+                                                        <mat-form-field class="example-full-width">
+                                                                <input matInput name="city" #city="ngModel"  [(ngModel)]="data.city" placeholder="Ville" required />
+                                                        </mat-form-field>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-9">
+                                                        <mat-form-field class="example-full-width">
+                                                                <input matInput placeholder="Boite Postale" value="Boite Postale">
+                                                        </mat-form-field>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-9">
+                                                        <mat-form-field class="example-full-width">
+                                                                <input matInput placeholder="Téléphone" value="Téléphone">
+                                                        </mat-form-field>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                    <div class="col-sm-9">
+                                                            <mat-form-field class="example-full-width">
+                                                                        <input matInput name="email" #email="ngModel"  [(ngModel)]="data.email" placeholder="E-mail" required />
+                                                            </mat-form-field>
+                                                    </div>
+                                                </div>
+                                        </form>
+                                        <div class="panel panel-default">
+                                                <div class="panel-heading">
+                                                    <h4 class="panel-title"><a href="#collapseB3" data-toggle="collapse"> Preferences </a></h4>
+                                                </div>
+                                        </div>
+                                        <div class="panel panel-default">
+                                                <div class="panel-heading">
+                                                    <h4 class="panel-title"><a href="#collapseB3" data-toggle="collapse">Parametres</a></h4>
+                                                </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="col-sm-offset-3 col-sm-9">
+                                                <button type="submit" class="btn basic-btn">Update</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                          </mat-tab>
+                          <mat-tab label="Offres d'emploi">
+                                        <div class="panel-body-company-edit">
+                                        <app-job-edit></app-job-edit>
+                                        </div>
+                          </mat-tab>
+                        </mat-tab-group>
+                      </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+

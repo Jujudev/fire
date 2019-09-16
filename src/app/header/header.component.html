@@ -1,3 +1,4 @@
+
 <div class="header">
   <nav class="navbar   navbar-site navbar-default" role="navigation">
     <div class="container">
@@ -7,16 +8,20 @@
           class="icon-bar"></span> <span class="icon-bar"></span></button>
         <a [routerLink]="['/']" class="navbar-brand logo logo-title">
           <!-- Original Logo will be placed here  -->
-          <img alt="AmJob" src="assets/img/logo-amjob.png">
+          <img alt="toggle" src="assets/img/logo-amjob.png">
         </a>
       </div>
       <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav navbar-right">
-          <li><a><i class="fa fa-user" aria-hidden="true"></i> BKA</a></li>                 
-          <li><a>Se connecter</a></li>
-          <li><a><i class="fa fa-sign-out" aria-hidden="true"></i> Se déconnecter</a></li>
-          <li><a>S'inscrire</a></li>
-          <li class="postadd"><a class="btn btn-block   btn-border btn-post btn-header"  href="#/companyIndex">Entreprise</a></li>                                                        
+        <ul class="nav navbar-nav navbar-right" *ngIf="!(authService.user$ | async)">
+          <li class="postadd"><a class="btn btn-block   btn-border btn-post btn-header"  routerLink="/login-company">Entreprise</a></li>                                                        
+        </ul>
+        <ul class="nav navbar-nav navbar-right" *ngIf="(authService.user$ | async)">
+          <li *ngIf="(authService.company$ | async)"><button mat-button type="button" routerLink="/company-profile">{{ (authService.user$ | async)?.email }}</button></li>
+          <li *ngIf="!(authService.company$ | async)"><button mat-button type="button" routerLink="/user-profile">{{ (authService.user$ | async)?.email }}</button></li>
+          <li><button mat-button type="button" [routerLink]="['/']" (click)="logoutUser()">Se deconnecter</button></li>                                                       
+        </ul>
+        <ul class="nav navbar-nav navbar-right"  *ngIf="!(authService.user$ | async)">
+          <li><button mat-button type="button"  [routerLink]="['/login']">Se connecter</button></li>
         </ul>
       </div>
       <!--/.nav-collapse -->

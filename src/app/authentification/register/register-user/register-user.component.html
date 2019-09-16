@@ -1,0 +1,36 @@
+<h3>Créer un compte</h3>
+
+<div>
+  <form #f="ngForm" (ngSubmit)="registerUser()">
+    <mat-form-field>
+      <input matInput type="text" name="email" placeholder="email" [(ngModel)]="newUser.email">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="password" name="password" placeholder="password" [(ngModel)]="newUser.password">
+    </mat-form-field>
+    
+    <button mat-raised-button type="submit" color="primary">Create a new Account</button>
+  </form>
+</div>
+
+
+<h3 *ngIf="!(authService.user$ | async)">Sign in</h3>
+
+<div>
+  <form #login="ngForm" (ngSubmit)="loginUser()" *ngIf="!(authService.user$ | async)">
+      <mat-form-field>
+        <input matInput type="text" name="email" placeholder="email" [(ngModel)]="existingUser.email">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="password" name="password" placeholder="password" [(ngModel)]="existingUser.password">
+      </mat-form-field>
+    <button mat-raised-button type="submit" color="primary">Sign in</button>
+
+  </form>
+</div>
+
+<div *ngIf="authService.user$ | async">
+    <span *ngIf="authService.user$ | async">logged as {{ (authService.user$ | async)?.email }}</span>
+    <button mat-button type="button" (click)="logoutUser()">logout</button>
+    <button mat-button (click)="authService.sendEmailVerification()">Send confirmation</button>
+</div>

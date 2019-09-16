@@ -49,8 +49,9 @@ export class JobComponent implements OnInit {
       salary: 0,
       city: '',
       country: '',
-      company: [],
       contractType: '',
+      companyId: null,
+      companyName: '',
       publishDate: new Date(Date.now())
     }
   }
