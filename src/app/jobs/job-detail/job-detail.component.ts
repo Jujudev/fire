@@ -29,6 +29,7 @@ export class JobDetailComponent implements OnInit {
   sendEmail()
   {
     this.emailService.SendEmail();
+    console.info('Sending Email Bassirou');
   }
 
 }
