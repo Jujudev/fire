@@ -52,7 +52,8 @@ export class JobComponent implements OnInit {
       contractType: '',
       companyId: null,
       companyName: '',
-      publishDate: new Date(Date.now())
+      publishDate: new Date(Date.now()),
+      email: ''
     }
   }
 }

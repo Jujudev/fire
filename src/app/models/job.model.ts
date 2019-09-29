@@ -12,4 +12,5 @@ export class Job {
     contractType: string;
     companyId : number;
     companyName: string;
+    email: string;
 }

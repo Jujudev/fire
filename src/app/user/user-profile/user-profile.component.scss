@@ -28,10 +28,10 @@
 }
 
 .sectionIntro {
-    /*background-color: #1FC8DB;*/
-    background-color: #149078;
-    /*background-color: #369;*/
-    color: white;
+   /* background-color: #01231E;
+    background-color: #149078;*/
+    background-color: #400080;
+    color: #e5ccff;
     width: 99.5%;
     padding:15px;
     margin-bottom: 10px;
@@ -43,6 +43,19 @@
 }
 
 .sectionProfile{
+    border:solid 1px whitesmoke;
+    height: 100%;
+    width: 99.5%;
+    float: left;
+    box-shadow: 1px 1px 4px #aaa;
+    padding: 10px;
+    background-color: white;
+    border-radius: 2px;
+    margin-top: 10px;
+}
+
+/*
+.sectionProfile{
     border:solid 0.02em whitesmoke;
     height: 100%;
     width: 49%;
@@ -51,7 +64,7 @@
     padding: 10px;
     background-color: white;
     border-radius: 2px;
-}
+}*/
 
 .marginLeft{
     margin-left: 15px;
@@ -192,3 +205,31 @@ section:last-child {
 }
 
 .clear {clear: both;}
+
+.tab-box
+{
+    border: solid 0px blue;
+    padding: 0;
+    width: 100%;
+}
+
+.tab-box-container {
+    border: solid 0px red;
+    width: 100%;
+    min-height: 400px;
+    height: 100%;
+}
+
+.btnContainer {
+    border: solid 0px red;
+    width: 100%;
+}
+
+.bntundoleft {
+    margin-left: 5px;
+}
+
+.basic-btn {
+    width: 120px;
+    background-color: #16A085;
+}

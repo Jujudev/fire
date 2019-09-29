@@ -61,9 +61,10 @@ export class JobEditComponent implements OnInit {
       publishDate: new Date(Date.now()),
       city: '',
       country:'',
-      contractType: 'cdi',
+      contractType: 'CDI',
       companyId : null,
       companyName : null,
+      email: '',
     }
   }
 

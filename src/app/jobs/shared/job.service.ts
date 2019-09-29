@@ -71,7 +71,10 @@ export class JobService {
       description2 : job.description2,
       salary: job.salary,
       publishDate : Date.now(),
-      contractType: job.contractType
+      contractType: job.contractType,
+      country: job.country,
+      city: job.city,
+      email: job.email,
     });
   }
 
