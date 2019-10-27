@@ -27,7 +27,6 @@ import { JobItemComponent } from './jobs/job-item/job-item.component';
 import { JobDetailComponent } from './jobs/job-detail/job-detail.component'
 import { JobDetailResolver } from './jobs/job-detail/job-detail.resolver';
 import { JobItemResultComponent } from './jobs/job-item-result/job-item-result.component';
-import { JobSearchComponent } from './jobs/job-search/job-search.component';
 import { EmailComponent } from './authentification/email/email.component';
 import { SignupComponent } from './authentification/signup/signup.component';
 import { RegisterUserComponent } from './authentification/register/register-user/register-user.component';
@@ -51,7 +50,6 @@ import { JobEditComponent } from './jobs/job-edit/job-edit.component';
     JobItemComponent,
     JobDetailComponent,
     JobItemResultComponent,
-    JobSearchComponent,
     EmailComponent,
     SignupComponent,
     RegisterUserComponent,

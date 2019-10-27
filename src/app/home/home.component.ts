@@ -37,43 +37,11 @@ export class HomeComponent implements OnInit {
         )
       }));
   }
-  searchByTitle(){
-    let value = this.searchKeyValue.toLowerCase();
-    this.jobService.searchJob(value)
-    .subscribe(result => {
-      this.name_filtered_items = result;
-      this.items = this.combineLists(result, this.age_filtered_items);
-    })
-  }
-
-  searchByCity(){
-    let value = this.searchCityValue.toLowerCase();
-    console.log('searchByCity()', value);
-    this.jobService.searchJobsByCity(value)
-    .subscribe(result => {
-      this.name_filtered_items = result;
-      this.items = this.combineLists(result, this.age_filtered_items);
-    })
-  }
-
-  combineLists(a, b){
-    console.log('start combine')
-    let result = [];
-
-    a.filter(x => {
-      return b.filter(x2 =>{
-        if(x2.payload.doc.id == x.payload.doc.id){
-          result.push(x2);
-        }
-      });
-    });
-    return result;
-  }
 
   onSearchClick()
   {
     this.router.navigate(['jobs'], {
-      queryParams: {'city' : this.searchCityValue, 'key' : this.searchKeyValue}
+      queryParams: {'key' : this.searchKeyValue.toLocaleLowerCase(), 'city' : this.searchCityValue.toLocaleLowerCase()}
     });
   }
 }

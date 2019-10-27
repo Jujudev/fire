@@ -38,32 +38,34 @@ export class JobService {
     return this.db.collection(this.basePath).snapshotChanges();
   }
 
-  getJobsByCityAndTitle(city, title)
+  getJobsByCityAndTitle(title, city)
   {
-    if(!this.isValueNotNullOrEmpty(title) && !this.isValueNotNullOrEmpty(city))
+    var titleSearch = (title as string).trim().toLocaleLowerCase().replace(" le ", " ").replace(" la ", " ").replace(" de ", " ")
+    .replace(" en ", " ").replace("d'","");
+
+    var citySearch = (city as string).trim().toLocaleLowerCase(); 
+
+    if(!this.isValueNotNullOrEmpty(titleSearch) && !this.isValueNotNullOrEmpty(citySearch))
     {
       return this.getJobs();
     }
-    else if (this.isValueNotNullOrEmpty(title) && !this.isValueNotNullOrEmpty(city))
+    else if(!this.isValueNotNullOrEmpty(titleSearch) && this.isValueNotNullOrEmpty(citySearch))
     {
-      return this.searchJob(title);
+      return this.db.collection(this.basePath, ref => ref.where("city_lowercase", "==", citySearch)).snapshotChanges();
     }
-    else if (!this.isValueNotNullOrEmpty(title) && this.isValueNotNullOrEmpty(city))
+    else
     {
-      return this.searchJobsByCity(city);
+      var search = (titleSearch.concat(" ").concat(citySearch)).trim();
+      
+      console.log(search);
+
+      return this.db.collection(this.basePath, ref => ref.where("keywords", "array-contains", search)).snapshotChanges(); 
     }
-
-    return this.db.collection(this.basePath, ref => ref.where("title", "==", title).where("city", "==", city)).snapshotChanges();
-  }
-
-  searchJob(searchValue){
-    return this.db.collection(this.basePath, ref => ref.where("title", "==", searchValue)).snapshotChanges();
   }
 
   searchJobsByCity(searchValue){
     return this.db.collection(this.basePath, ref => ref.where("city", "==", searchValue)).snapshotChanges();
   }
-  
   insertJob(job){
     return this.db.collection(this.basePath).add({
       title : job.title,

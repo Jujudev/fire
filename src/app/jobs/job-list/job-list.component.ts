@@ -22,7 +22,7 @@ export class JobListComponent implements OnInit {
 
   ngOnInit() {
     this.route.queryParams.subscribe( (c) => {
-      this.jobList = this.jobService.getJobsByCityAndTitle(c['city'], c['key']).pipe(
+      this.jobList = this.jobService.getJobsByCityAndTitle(c['key'], c['city']).pipe(
         map(changes => {
             return changes.map(a => {
               const data = a.payload.doc.data() as Job;
@@ -33,6 +33,7 @@ export class JobListComponent implements OnInit {
           )
         }));
   });
-
   }
+
+
 }
