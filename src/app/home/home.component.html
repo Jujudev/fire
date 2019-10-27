@@ -3,22 +3,24 @@
 	<div class="dtable hw100">
 		<div class="dtable-cell hw100">
 			<div class="container text-center" >
-				<!--<h1 class="intro-title" style ="color:#149078;"><b>Votre avenir au bout du
-					clic</b></h1>-->
+				<!--<h1 class="intro-title" style ="color:#149078;"><b>Votre avenir au bout du clic</b></h1>-->
 
 				<p class="sub animateme fittext3 animated fadeIn" style ="color:black">
 					Plus de 10 000 offres d'emploi au <b>Sénégal</b>
 				</p>
 
 				<div class="row search-row animated fadeInUp">
+					
+					<div class="col-lg-4 col-sm-4 search-col relative">
+							<i class="icon-docs icon-append"></i> 
+							<input type="text" class="form-control" [(ngModel)]="searchKeyValue" id="autocomplete-ajax" [ngModelOptions]="{standalone: true}" placeholder="Titre, Mots-clés ou Compagnie"  class="form-control has-icon">
+					</div>
+
 					<div class="col-lg-4 col-sm-4 search-col relative locationicon">
 							<i class="icon-location-2 icon-append"></i> 
 							<input type="text" class="form-control" [(ngModel)]="searchCityValue" id="autocomplete-ajax" [ngModelOptions]="{standalone: true}" placeholder="Région ou Département"  class="form-control locinput input-rel searchtag-input has-icon">
 					</div>
-					<div class="col-lg-4 col-sm-4 search-col relative">
-						<i class="icon-docs icon-append"></i> 
-						<input type="text" class="form-control" [(ngModel)]="searchKeyValue" id="autocomplete-ajax" [ngModelOptions]="{standalone: true}" placeholder="Titre, Mots-clés ou Compagnie"  class="form-control has-icon">
-					</div>
+
 					<div class="col-lg-4 col-sm-4 search-col">
 						<a ui-sref= "job-offers({query: vm.queryText})">
 							<button class="btn btn-primary btn-search btn-block" (click)="onSearchClick()">

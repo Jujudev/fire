@@ -5,7 +5,6 @@ import { JobListComponent} from './jobs/job-list/job-list.component';
 import { JobDetailComponent } from './jobs/job-detail/job-detail.component';
 import { JobDetailResolver } from './jobs/job-detail/job-detail.resolver';
 import { JobSearchResultResolver } from './jobs/job-list/job-search-result.resolver';
-import { JobSearchComponent } from './jobs/job-search/job-search.component';
 import { LoginComponent } from './authentification/login/login.component';
 import { SignupComponent } from './authentification/signup/signup.component';
 import { EmailComponent } from './authentification/email/email.component';
