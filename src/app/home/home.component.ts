@@ -40,6 +40,7 @@ export class HomeComponent implements OnInit {
 
   onSearchClick()
   {
+    console.log('onSearchClick:key='+this.searchKeyValue.toLocaleLowerCase()+ ' and city ='+this.searchCityValue.toLocaleLowerCase())
     this.router.navigate(['jobs'], {
       queryParams: {'key' : this.searchKeyValue.toLocaleLowerCase(), 'city' : this.searchCityValue.toLocaleLowerCase()}
     });

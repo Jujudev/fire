@@ -1,73 +1,87 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Job } from '../../models/job.model';
 import { Company } from 'src/app/models/company.model';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class JobService {
-
-  getCompanyJobs() {
-    return this.db.collection(this.basePath).snapshotChanges();
-  } 
-
-  private basePath : string = 'jobs';
+  private jobsBasePath : string = 'jobs';
+  private usersJobsBasePath : string = 'users_jobs';
   selectedJob: Job = new Job();
+  postedJobList : Observable<any> = new Observable<any>();
 
   constructor(private db :AngularFirestore) { }
+  
+  getCompanyJobs() {
+    return this.db.collection(this.jobsBasePath).snapshotChanges();
+  } 
 
   getJob(jobKey){
-    return this.db.collection(this.basePath).doc(jobKey).snapshotChanges();
+    return this.db.collection(this.jobsBasePath).doc(jobKey).snapshotChanges();
   }
 
   getCompany(companyKey : string) {
     return this.db.collection('companies').doc(companyKey).snapshotChanges();
-}
+  }
 
   updateJob(jobKey, value){
-    return this.db.collection(this.basePath).doc(jobKey).set(value);
+    return this.db.collection(this.jobsBasePath).doc(jobKey).set(value);
   }
 
   deleteJob(jobKey){
-    return this.db.collection(this.basePath).doc(jobKey).delete();
+    return this.db.collection(this.jobsBasePath).doc(jobKey).delete();
   }
 
   getJobs(){
-    return this.db.collection(this.basePath).snapshotChanges();
+    return this.db.collection(this.jobsBasePath).snapshotChanges();
   }
 
-  getJobsByCityAndTitle(title, city)
+  getJobsByCityAndTitle(city, key)
   {
-    var titleSearch = (title as string).trim().toLocaleLowerCase().replace(" le ", " ").replace(" la ", " ").replace(" de ", " ")
-    .replace(" en ", " ").replace("d'","");
-
-    var citySearch = (city as string).trim().toLocaleLowerCase(); 
-
-    if(!this.isValueNotNullOrEmpty(titleSearch) && !this.isValueNotNullOrEmpty(citySearch))
+    if(!this.isNotNullOrEmpty(key) && !this.isNotNullOrEmpty(city))
     {
       return this.getJobs();
     }
-    else if(!this.isValueNotNullOrEmpty(titleSearch) && this.isValueNotNullOrEmpty(citySearch))
+    else if (this.isNotNullOrEmpty(key) && !this.isNotNullOrEmpty(city))
     {
-      return this.db.collection(this.basePath, ref => ref.where("city_lowercase", "==", citySearch)).snapshotChanges();
+      return this.searchJob(key);
     }
-    else
+    else if (!this.isNotNullOrEmpty(key) && this.isNotNullOrEmpty(city))
     {
-      var search = (titleSearch.concat(" ").concat(citySearch)).trim();
-      
-      console.log(search);
+      return this.searchJobsByCity(city);
+    }
 
-      return this.db.collection(this.basePath, ref => ref.where("keywords", "array-contains", search)).snapshotChanges(); 
-    }
+    return this.searchJob(key + ' ' + city);
+  }
+
+  searchJob(searchValue){
+    var textSearch = (searchValue as string).toLowerCase();
+    return this.db.collection(this.jobsBasePath, ref => ref.where("keywords", "array-contains", textSearch)).snapshotChanges();
   }
 
   searchJobsByCity(searchValue){
-    return this.db.collection(this.basePath, ref => ref.where("city", "==", searchValue)).snapshotChanges();
+    return this.db.collection(this.jobsBasePath, ref => ref.where("city_lowercase", "==", searchValue)).snapshotChanges();
   }
-  insertJob(job){
-    return this.db.collection(this.basePath).add({
+
+  getUserPostLinks(userUid)
+  {
+    return this.db.collection(this.usersJobsBasePath, ref => ref.where("userUid", "==", userUid)).snapshotChanges();
+  }
+  
+  getPostedJobs(jobsIds:string[]){
+    if(!jobsIds || jobsIds.length == 0)
+    {
+      return new Observable<any[]>();
+    }
+    return this.db.collection(this.jobsBasePath, ref => ref.where("uid", "in", jobsIds)).snapshotChanges();;
+  }
+  
+  insertJob(job, company:Company){
+    return this.db.collection(this.jobsBasePath).add({
       title : job.title,
       description1 : job.description1,
       description2 : job.description2,
@@ -77,10 +91,38 @@ export class JobService {
       country: job.country,
       city: job.city,
       email: job.email,
+    }).then(
+      (insertedJob) => {
+        console.log(insertedJob);           
+        insertedJob.update({
+          uid : insertedJob.id,
+          companyUid: company.uid,
+          companyName: company.name,
+        })
+      }).catch(
+          (err) => {
+            console.log(err);
+          }
+      );
+  }
+
+  applyJob(user_job)
+  {
+    console.log('Apply job');
+    this.db.collection(this.usersJobsBasePath, ref => ref.where("userUid", "==", user_job.userUid).where("jobUid", "==", user_job.jobUid)).get().subscribe(snap => {
+      if (snap.empty) {
+        return this.db.collection('users_jobs').add({
+          userUid : user_job.userUid,
+          jobUid : user_job.jobUid,
+          jobEmail : user_job.jobEmail,
+          jobTitle : user_job.jobTitle,
+          postDate : Date.now()
+        });
+      }
     });
   }
 
-  isValueNotNullOrEmpty(key : any)
+  isNotNullOrEmpty(key : any)
   {
     return (typeof key!='undefined' && key);
   }

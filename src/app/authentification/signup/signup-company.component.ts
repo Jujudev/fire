@@ -21,7 +21,6 @@ export class SignupCompanyComponent implements OnInit {
 
   onSubmit(formData) {
     if(formData.valid) {
-      console.log(formData.value);
       this.newCompany.city = formData.value.city;
       this.newCompany.country = formData.value.country;
       this.newCompany.email = formData.value.email;

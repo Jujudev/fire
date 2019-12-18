@@ -23,6 +23,12 @@
         <ul class="nav navbar-nav navbar-right"  *ngIf="!(authService.user$ | async)">
           <li><button mat-button type="button"  [routerLink]="['/login']">Se connecter</button></li>
         </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><button mat-button type="button"  [routerLink]="['/jobs']">Rechercher</button></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><button mat-button type="button"  [routerLink]="['/']">Réseau</button></li>
+        </ul>
       </div>
       <!--/.nav-collapse -->
     </div>

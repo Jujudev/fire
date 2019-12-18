@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { DatePipe } from '@angular/common';
 import { Company } from 'src/app/models/company.model';
 import { Job } from 'src/app/models/job.model';
+import { AuthService } from 'src/app/authentification/services/auth.service';
 
 @Component({
   selector: 'app-job-edit',
@@ -13,8 +14,13 @@ import { Job } from 'src/app/models/job.model';
 })
 export class JobEditComponent implements OnInit {
   jobList : Array<any>;
-  
-  constructor(private jobService : JobService, private tostr : ToastrService) { }
+  company : Company;
+  constructor(private jobService : JobService, private tostr : ToastrService, private authService: AuthService) { 
+    if(authService)
+    {
+      authService.company$.subscribe( val => {this.company = val as Company;})
+    }
+  }
 
   ngOnInit() {
     this.resetForm();
@@ -30,17 +36,14 @@ export class JobEditComponent implements OnInit {
   {
     if(value.id == null)
     {
-      console.warn('value id == null');
-      console.warn('insert', value );
-
-      this.jobService.insertJob(value);
+      this.jobService.insertJob(value, this.company);
     }
     else
     {
       this.jobService.updateJob(value.id, value);
     }
       this.resetForm(jobForm);
-      this.tostr.success('Job sumitted successfully', 'Job Register');
+      this.tostr.success('Job sumitted successfully', 'Soumission Offre');
   }
 
   resetForm(jobForm? : NgForm)

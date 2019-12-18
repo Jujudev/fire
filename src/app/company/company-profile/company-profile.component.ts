@@ -19,7 +19,10 @@ import { switchMap } from 'rxjs/operators';
 export class CompanyProfileComponent implements OnInit {
   data : Company;
   constructor(private authService: AuthService, private jobService : JobService) { 
-    authService.company$.subscribe( val => {this.data = val;})
+    if(authService)
+    {
+      authService.company$.subscribe( val => {this.data = val as Company;})
+    }
   }
 
   ngOnInit() {

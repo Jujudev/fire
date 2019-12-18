@@ -23,9 +23,17 @@
 
 .basic-btn
 {
-    width: 50%;
+    width: 120px;
     background-color: #149078;
     color: white;
+    align-self: left;
+}
+
+.containerBtn {
+    text-align: left;
+    border: solid 0px blue;
+    padding: 0;
+    margin:  10px;
 }
 
 .example-full-width {
