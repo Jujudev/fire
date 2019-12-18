@@ -14,3 +14,12 @@ export class Job {
     companyName: string;
     email: string;
 }
+
+export class UserJob {
+    $id : string;
+    userUid : string;
+    jobUid : string;
+    jobEmail : string;
+    jobTitle : string;
+    postDate : Date;
+}

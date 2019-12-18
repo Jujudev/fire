@@ -25,7 +25,7 @@ export class JobComponent implements OnInit {
     if(value.id == null)
     {
       console.log('insert new job');
-      this.jobService.insertJob(value);
+      this.jobService.insertJob(value, null);
     }
     else
     {

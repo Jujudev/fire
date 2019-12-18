@@ -38,6 +38,7 @@ import { SignupCompanyComponent } from './authentification/signup/signup-company
 import { CompanyProfileComponent } from './company/company-profile/company-profile.component';
 import { AuthorGuardService } from './authentification/services/author-guard.service';
 import { JobEditComponent } from './jobs/job-edit/job-edit.component';
+import { PostedjobItemComponent } from './jobs/postedjob-item/postedjob-item.component';
 
 @NgModule({
   declarations: [
@@ -58,8 +59,8 @@ import { JobEditComponent } from './jobs/job-edit/job-edit.component';
     LoginCompanyComponent,
     SignupCompanyComponent,
     CompanyProfileComponent,
-    JobEditComponent
-  ],
+    JobEditComponent,
+    PostedjobItemComponent  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

@@ -31,7 +31,6 @@ export class LoginComponent implements OnInit {
 
   onSubmit(formData) {
     if(formData.valid) {
-      console.log(formData.value);
       this.af.auth.signInWithEmailAndPassword(formData.value.email, formData.value.password)
         .then(
           (sucess) => {

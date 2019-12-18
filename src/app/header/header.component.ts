@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthService } from '../authentification/services/auth.service';
-import { PostService } from '../authentification/services/post.service';
 
 
 @Component({
@@ -12,8 +11,12 @@ import { PostService } from '../authentification/services/post.service';
 export class HeaderComponent implements OnInit {
   isLoggedIn$: Observable<boolean>;
 
-  constructor(private authService: AuthService, private postService: PostService) {
-    console.log('authService userinfo', authService.user$);
+  constructor(private authService: AuthService) {
+    authService.user$.subscribe(userInfo =>
+    {
+      if(userInfo)
+        console.log(userInfo.email, ' get logged');
+    })
    }
 
   ngOnInit() {

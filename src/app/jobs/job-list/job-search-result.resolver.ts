@@ -6,7 +6,6 @@ import { JobService } from '../shared/job.service';
 export class JobSearchResultResolver  implements Resolve<any>{
 
   constructor(public jobService: JobService) { }
-
     resolve(route: ActivatedRouteSnapshot,) {
 
     return new Promise((resolve, reject) => {

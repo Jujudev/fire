@@ -4,38 +4,123 @@
         <div class="container">
               <div>
                   <div class="sectionHeader">
-                    Abdou Dione - Senior .NET Developer at Societe Generale, Paris(France)                   
+                    <h2 *ngIf="(authService.user$ | async)">{{user.firstname}} {{user.lastname}} - {{user.profession}}</h2>                   
                   </div>
                     <div class="sectionIntro">
                         <div class="section11Profile" style="float: right;">
                             <img class="card-img-top imgProfile2" [src]="(authService.user$ | async)?.photoURL || 'assets/img/default-user.jpg'">
                         </div>
-                        <p>
-                            Pretended exquisite see cordially the you. Weeks quiet do vexed or whose. Motionless if no to affronting imprudence no precaution. My indulged as disposal strongly attended.Motionless if no to affronting imprudence no precaution. My indulged as disposal strongly attended.
-                        </p>
-                        <p>
-                            All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.
-                        </p>                   
+                        <p *ngIf="(authService.user$ | async)" class="textintro">
+                                {{user.introduction}}
+                        </p>               
                     </div>
                     <div>
                     <div class="sectionProfile">
                             <div class="col-sm-9 page-content col-thin-left tab-box-container">
                                     <div class="tab-box">
                                       <mat-tab-group>
-                                        <mat-tab label="Profil"></mat-tab>
+                                        <mat-tab label="Profil">
+                                            <div *ngIf="(authService.user$ | async)">
+                                            <form class="form-horizontal"  id="profileForm" #profileForm = "ngForm" (ngSubmit)="onSubmitProfile(profileForm.value)">
+                                                <input  name="id" #id="ngModel" [(ngModel)]="user.uid" hidden="hidden" > 
+
+                                                <div class="panel-user-profile-left">
+                                                        
+                                                            <div class="form-group">
+                                                                    <div class="col-sm-9" >
+                                                                        <mat-form-field class="example-full-width">
+                                                                                <input matInput name="lastname" #lastname="ngModel" [(ngModel)]="user.lastname" placeholder="Nom" required />
+                                                                        </mat-form-field>
+                                                                    </div>
+                                                            </div>
+                     
+                                                            <div class="form-group">
+                                                                    <div class="col-sm-9">
+                                                                            <mat-form-field class="example-full-width">
+                                                                                    <input matInput name="firstname" #firstname="ngModel" [(ngModel)]="user.firstname" placeholder="Prenom" required />
+                                                                            </mat-form-field>
+                                                                    </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="col-sm-9">
+                                                                        <mat-form-field class="example-full-width">
+                                                                                <input matInput name="profession" #profession="ngModel"  [(ngModel)]="user.profession" placeholder="Profession" />
+                                                                        </mat-form-field>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <mat-form-field class="example-full-width-textarea" >
+                                                                    <textarea  style="min-height:120px;" matInput name="introduction" #introduction="ngModel" [(ngModel)]="user.introduction" placeholder="Présentation"> </textarea>
+                                                                </mat-form-field>
+                                                            </div>
+                                                </div>
+
+                                                <div class="panel-user-profile-right" *ngIf="(authService.user$ | async)">
+                                                        <div class="form-group">
+                                                            <div class="col-sm-9">
+                                                                    <mat-form-field class="example-full-width">
+                                                                            <input matInput name="address" #address="ngModel" [(ngModel)]="user.address" placeholder="Adresse"/>
+                                                                    </mat-form-field>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-9">
+                                                                    <mat-form-field class="example-full-width">
+                                                                            <input matInput name="phone" #phone="ngModel" [(ngModel)]="user.phone" placeholder="Téléphone" />
+                                                                    </mat-form-field>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                                <div class="col-sm-9">
+                                                                        <mat-form-field class="example-full-width">
+                                                                                    <input matInput name="email" #email="ngModel"  [(ngModel)]="user.email" placeholder="E-mail" />
+                                                                        </mat-form-field>
+                                                                </div>
+                                                        </div>
+                                                        <div  class="form-group">
+                                                            <div class="col-sm-9">
+                                                                    <mat-form-field class="example-full-width-combobox">
+                                                                            <mat-label>Années d'expérience</mat-label>
+                                                                            <mat-select>
+                                                                                    <mat-option value="option1">0-3</mat-option>
+                                                                                    <mat-option value="option2">3-6</mat-option>
+                                                                                    <mat-option value="option3">6-10</mat-option>
+                                                                                    <mat-option value="option3">> 10</mat-option>
+                                                                            </mat-select>
+                                                                    </mat-form-field>
+                                                            </div>
+                                                        </div>
+                                            </div>
+                                            <div class="clear"></div>
+
+                                            <div class='btnContainer'>
+                                                    <button class="btn basic-btn bntundoleft" type="submit" [disabled]="!profileForm.valid">Enregister</button>
+                                            </div>
+                                        </form>
+                                        </div>
+                                    
+
+                                    </mat-tab>
+                                        <mat-tab label="Offres d'emploi postulés">
+                                            <div class="profile-mat-tab-container">
+                                                <ul>
+                                                    <li class="list-group-item" *ngFor="let job of postedJobs | async">
+                                                    <app-postedjob-item [job]=job></app-postedjob-item>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </mat-tab>
                                         <mat-tab label="Expérience professionnelle"></mat-tab>
-                                        <mat-tab label="Formation"></mat-tab>
-                                        <mat-tab label="Offres d'emploi postulés"></mat-tab>
                                         <mat-tab label="Paramètres"></mat-tab>
-                                      </mat-tab-group>
+                                     
+                                      
+                                    
+                                    </mat-tab-group>
                                     </div>
                             </div>
                             <div class="clear"></div>
 
-                            <div class='btnContainer'>
-                                    <button class="btn basic-btn" type="button">Editer <i class="fa fa-pencil-square"></i></button>
-                                    <button class="btn basic-btn bntundoleft" type="submit"><i class="fa fa-save"></i> Submit</button>
-                            </div>
+
                     </div>
                     <!--
                         <div class="sectionExperience">

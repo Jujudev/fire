@@ -1,8 +1,25 @@
 <app-header></app-header>
 <div id="wrapper">
-    <div class="jobs-list-header" style="background-image: url(assets/img/jobs/bgpurple.png);">
-
-    </div>
+   <div class="search-row-wrapper" style="background-image: url(assets/img/jobs/bgpurple.jpeg); background-size: cover; background-position: center center;">
+   <div class="container text-center">
+       <div class="col-sm-3">
+           <input class="form-control keyword" type="text" placeholder="Titres, mots-clés">
+       </div>
+       <div class="col-sm-3">
+           <select class="form-control" name="category" id="search-category">
+                <option selected="selected" value="">Tous les secteurs</option>
+           </select>
+       </div>
+       <div class="col-sm-3">
+           <select class="form-control" name="location" id="id-location">
+               <option selected="selected" value="">Toutes les villes</option>
+           </select>
+       </div>
+       <div class="col-sm-3">
+           <button class="btn btn-block btn-primary  "> Rechercher <i class="fa fa-search"></i></button>
+       </div>
+   </div>
+</div>
     <!-- /.jobs-intro -->
     <!-- /.search-row -->
     <div class="main-container">

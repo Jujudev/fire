@@ -17,7 +17,6 @@ export class SignupComponent implements OnInit {
 
   onSubmit(formData) {
     if(formData.valid) {
-      console.log(formData.value);
       this.af.auth.createUserWithEmailAndPassword(formData.value.email, formData.value.password)
         .then(
           (sucess) => {

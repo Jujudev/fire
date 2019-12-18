@@ -33,7 +33,6 @@ export class AuthService {
     }));
            
   constructor(private angularfireAuth: AngularFireAuth, private afs: AngularFirestore, private router: Router) { 
-    console.log('Authservice.user..:', angularfireAuth.auth.currentUser);    
     //// Get auth data, then get firestore user document || null
     this.user$ = this.angularfireAuth.authState.pipe(switchMap(user => {
         if (user) {
@@ -48,16 +47,21 @@ export class AuthService {
     .subscribe(isCompany => {
         if(isCompany)
         {
-            this.company$ = this.angularfireAuth.authState.pipe(switchMap(user => {
-                if (user) {
-                    return this.afs.doc<User>(`companies/${user.uid}`).valueChanges();
-                } 
-                else {
-                  return of(null);
-                }
-            }));
+          this.setCompanyData();
         }
     });
+  }
+
+  setCompanyData()
+  {
+    this.company$ = this.angularfireAuth.authState.pipe(switchMap(user => {
+      if (user) {
+          return this.afs.doc<User>(`companies/${user.uid}`).valueChanges();
+      } 
+      else {
+        return of(null);
+      }
+  }));
   }
   
 
@@ -66,8 +70,10 @@ export class AuthService {
     this.angularfireAuth.auth.signInWithPopup(new auth.GoogleAuthProvider())    
     .then(credential =>  {
       console.info('Sign In with Google');
-      this.updateUserData(credential.user);
-      this.router.navigate(['/']);
+      this.updateUserData(credential.user).then(status =>
+        this.router.navigate(['/'])
+      );
+      
   }).catch(
     (err) => {
       this.error$ = err;
@@ -93,9 +99,9 @@ export class AuthService {
   {
     this.angularfireAuth.auth.signInWithEmailAndPassword(email, password)
     .then(
-      (sucess) => {
-        console.log(sucess);           
-        this.updateUserData(sucess.user);
+      (auth) => {
+        console.log('sucess');           
+        this.updateUserData(auth.user);
         this.router.navigate(['/'])
       }).catch(
           (err) => {
@@ -120,7 +126,7 @@ export class AuthService {
     const user = firebase.auth().currentUser;
     if(user) {
         user.sendEmailVerification().then(() => {
-          console.log('email envoyé');
+          console.log('email validation sent');
         }).catch((error) => {
           console.error('error sending email', error);
         })
@@ -145,20 +151,47 @@ export class AuthService {
 
   }
 
-  public updateUserData(user) {
+  public updateUserAdditionalInfos(userId : string, profession: string, address: string, introduction : string)
+  {
+    var userRef  = this.afs.doc(`users/${userId}`).ref;
+    console.log('updateUserAdditionalInfos', userId)
+      return userRef.update({ 
+      address : address,
+      profession : profession,
+      introduction : introduction});
+  }
+
+  public updateUserData(user: firebase.User, profession?: string, address?: string, introduction?: string) {
     // Sets user data to firestore on login
+    const displayName = this.angularfireAuth.auth.currentUser.displayName.split(' ');
+    var firstname = '';
+    var lastname = '';
+
+    for(var i = 0; i < displayName.length; i++)
+    {
+      if(i == 0)
+      {
+        firstname = displayName[i];
+      }
+      else {
+        lastname += displayName[i].concat(' ');
+      }
+    }
+
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
-    const data: User = {
-      uid: user.uid,
+    return userRef.update({uid: user.uid,
       email: user.email,
       roles: {
         subscriber: true
-      }
-    }
-    return userRef.set(data, { merge: true })
+      },
+      firstname: firstname,
+      lastname: lastname,
+      phone: user.phoneNumber,
+      photoURL: user.photoURL});
   }
 
   public updateCompanyUserData(user) {
+    this.setCompanyData();
     // Sets user data to firestore on login
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
     const data: User = {
@@ -166,16 +199,21 @@ export class AuthService {
       email: user.email,
       roles: {
         company: true
-      }
+      },
+      firstname: "",
+      lastname: "",
+      phone: "",
+      photoURL: "",
+      profession: "",
+      address: "",
+      introduction: ""
     }
     return userRef.set(data, { merge: true })
   }
 
   public updateCompanyData(company) {
-    // Sets comany data to firestore on login
+    // Sets company data to firestore on login
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`companies/${company.uid}`);
-    console.log(company.uid);
-    console.log('updateCompany');
     const data: Company = {
       uid: company.uid,
       email: company.email,
@@ -185,8 +223,6 @@ export class AuthService {
       jobemail: company.jobemail,
       isVerified: company.isVerified,
     }
-    console.log('data');
-    console.log(data);
     return userRef.set(data, { merge: true })
   }
 }

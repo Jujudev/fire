@@ -27,11 +27,18 @@
     border-radius: 2px;
 }
 
+.sectionHeader > h2{
+    font-weight: bold;
+    color: whitesmoke;
+}
+
 .sectionIntro {
    /* background-color: #01231E;
-    background-color: #149078;*/
-    background-color: #400080;
-    color: #e5ccff;
+    background-color: #149078;
+    background-color: #400080;*/
+    background-color:#01231E;
+    /*color: #e5ccff;*/
+    color: whitesmoke;
     width: 99.5%;
     padding:15px;
     margin-bottom: 10px;
@@ -73,7 +80,10 @@
 .section1Profile {
     border: solid 0px whitesmoke;
     background-color: white;
-    height: 120px; width: 150px;float: left;margin: 10px;
+    height: 120px; 
+    width: 150px;
+    float: left;
+    margin: 10px;
     border-radius: 2px;
 }
 
@@ -223,6 +233,8 @@ section:last-child {
 .btnContainer {
     border: solid 0px red;
     width: 100%;
+    padding-left: 3.4em;
+    padding-bottom: 3.6em;
 }
 
 .bntundoleft {
@@ -232,4 +244,77 @@ section:last-child {
 .basic-btn {
     width: 120px;
     background-color: #16A085;
+}
+
+.profile-mat-tab-container
+{
+    margin-top:1em;
+    min-height: 50em;
+}
+
+.tab-box{
+    /*background-color: white;*/
+    background-color: white;
+}
+
+.list-group-item, .ng-star-inserted
+{
+    border-color: whitesmoke;
+}
+
+.panel-user-profile-left
+{
+    background-color: white;
+    width: 48%;
+    border: solid 0px red;
+    padding: 50px;
+    float: left;
+}
+.panel-user-profile-right
+{
+    background-color: white;
+    width: 48%;
+    border: solid 0px red;
+    padding: 50px;
+    float: left;
+    margin-left: 0.5em;
+}
+
+.example-full-width-textarea {
+    width: 220px;
+}
+
+.form-group 
+{
+    border: 0px solid blue;
+}
+
+.mat-form-field
+{
+    width:330px;
+}
+
+.example-full-width-textarea{
+    border: 0px solid blue;
+    margin-left: 14px;
+}
+
+.main-container {
+    height: 360px;
+    background-image: url('../../../assets/img/jobs/bg4.jpg')  ;
+    background-repeat: no-repeat;
+    background-position-y: -470px;
+}
+
+#wrapper {
+    height: 360px;
+}
+.textintro {
+    font-size: 1.2em;
+    line-height: 1.5em;
+    font-style: italic;
+}
+
+.example-full-width-combobox{
+    width: 140px;
 }

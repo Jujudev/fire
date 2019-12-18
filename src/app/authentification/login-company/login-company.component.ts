@@ -12,20 +12,25 @@ import { AuthService } from '../services/auth.service';
 export class LoginCompanyComponent implements OnInit {
   error: any;
 
-  constructor(public af: AngularFireAuth, public authService: AuthService, private router: Router) { }
+  constructor(public af: AngularFireAuth, public authService: AuthService, private router: Router) { 
+
+  }
 
   ngOnInit() {
   }
 
   onSubmit(formData) {
     if(formData.valid) {
-      console.log(formData.value);
-      this.af.auth.signInWithEmailAndPassword(formData.value.email, formData.value.password)
+      this.authService.login(formData.value.email, formData.value.password)
         .then(
           (sucess) => {
             console.log(sucess);           
-            this.authService.updateUserData(sucess.user);
-            this.router.navigate(['/company-profile'])
+            this.authService.updateCompanyUserData(sucess.user).then(status =>
+              {
+                this.router.navigate(['/company-profile']);
+              }             
+            );
+            
           }).catch(
               (err) => {
                 this.error = err;
