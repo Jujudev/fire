@@ -8,7 +8,9 @@ import { of } from 'rxjs';
 import { JobService } from 'src/app/jobs/shared/job.service';
 import { Job, UserJob } from 'src/app/models/job.model';
 import { User } from 'src/app/authentification/services/user';
+import { ToastrService } from 'ngx-toastr';
 import { NgForm } from '@angular/forms';
+
 
 
 @Component({
@@ -25,7 +27,7 @@ export class UserProfileComponent implements OnInit {
   user : User;
 
   
-  constructor(private authService: AuthService, private router: Router, private jobService: JobService) {
+  constructor(private authService: AuthService, private router: Router, private tostr : ToastrService, private jobService: JobService) {
     this.authService.user$
                  .take(1)
                  .map(user => _.has(_.get(user, 'roles'), 'company'))
@@ -40,6 +42,8 @@ export class UserProfileComponent implements OnInit {
       if(user)
       {
         this.user = user;
+
+        console.log('before-getUserPostLinks ', user.uid)
         this.userJobLinksList = this.jobService.getUserPostLinks(user.uid).pipe(
           map(changes => {
               return changes.map(a => {
@@ -50,7 +54,8 @@ export class UserProfileComponent implements OnInit {
             ));
         this.userJobLinksList.subscribe( x => {       
             this.postedJobsId = x.map(({ jobUid }) => jobUid) as string[];
-            this.postedJobs = this.jobService.getPostedJobs(this.postedJobsId).pipe(
+            let jobIds = (this.postedJobsId === undefined) ? [''] : this.postedJobsId;
+            this.postedJobs = this.jobService.getPostedJobs(jobIds).pipe(
               map(changes => {
                   return changes.map(a => {
                     const data = a.payload.doc.data() as Job ;
@@ -68,14 +73,14 @@ export class UserProfileComponent implements OnInit {
 
   }
 
-  onSubmitProfile(value)
+  onSubmitProfile(value, jobForm : NgForm)
   {
-    if(value.id != null)
+    console.log('onSubmitProfile')
+    console.log(value.uid)
+    if(value.uid !== null)
     {
-      var userUpdate = value as User;
-      console.log('gooo gooo');
-
-      this.authService.updateUserAdditionalInfos(value.id, userUpdate.profession, userUpdate.address, userUpdate.introduction);
+      this.authService.updateUser(value.uid, this.user)
+      .then(() => this.tostr.success('Votre profil a été mis à jour', ''));
     }
   }
 }

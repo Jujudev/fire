@@ -28,7 +28,12 @@
     </div>
     <div class="form-group">
         <mat-form-field class="example-full-width">
-              <input matInput name="contractType" #contractType="ngModel" [(ngModel)]="jobService.selectedJob.contractType" placeholder="contractType" required />
+            <mat-label>Type de contrat</mat-label>
+            <mat-select [(ngModel)]="jobService.selectedJob.contractType" name="contractType" #contractType="ngModel" [(ngModel)]="jobService.selectedJob.contractType">
+                <mat-option *ngFor="let ctt of contracttypes" [value]="ctt">
+                    {{ctt.viewValue}}
+                </mat-option>
+              </mat-select>
         </mat-form-field>
     </div>
     <div class="form-group">
@@ -42,9 +47,19 @@
       </mat-form-field>
     </div>
     <div class="form-group">
+        <mat-form-field class="example-full-width">
+            <mat-label>Secteur</mat-label>
+            <mat-select [(ngModel)]="jobService.selectedJob.category" name="category">
+                <mat-option *ngFor="let ctg of categories" [value]="ctg.value">
+                    {{ctg.viewValue}}
+                </mat-option>
+              </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="form-group">
       <!--{{jobService.selectedJob.publishDate | date:'medium'}}-->
       <mat-form-field>
-          <input matInput name="publishDate" #publishDate="ngModel"  readonly="true" [matDatepicker]="picker" placeholder="PublishDate" [(ngModel)]="jobService.selectedJob.publishDate">
+          <input matInput name="publishDate" #publishDate="ngModel"  [matDatepicker]="picker" placeholder="PublishDate" [(ngModel)]="jobService.selectedJob.publishDate">
       </mat-form-field>
     </div>
     <div class="form-group">

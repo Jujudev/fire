@@ -14,8 +14,9 @@ export class LoginComponent implements OnInit {
   error: any;
 
   constructor(public af: AngularFireAuth, public authService: AuthService, private router: Router)  { 
-    this.af.authState.subscribe(auth => {
-      if(auth) {
+    this.authService.user$.subscribe(u => {
+      if(u) {
+        console.log(u.email);
         this.router.navigateByUrl('/');
       }
     });
@@ -35,8 +36,6 @@ export class LoginComponent implements OnInit {
         .then(
           (sucess) => {
             console.log(sucess);           
-            this.authService.updateUserData(sucess.user);
-            this.router.navigate(['/'])
           }).catch(
               (err) => {
                 this.error = err;

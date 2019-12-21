@@ -53,7 +53,8 @@ export class JobComponent implements OnInit {
       companyId: null,
       companyName: '',
       publishDate: new Date(Date.now()),
-      email: ''
+      email: '',
+      category: ''
     }
   }
 }

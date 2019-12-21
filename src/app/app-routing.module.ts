@@ -24,7 +24,7 @@ const routes: Routes = [
   { path: 'signup', component : SignupComponent },
   { path: 'company-signup', component : SignupCompanyComponent },
   { path: 'login-email', component: EmailComponent },
-  { path: 'user-profile', component: UserProfileComponent },
+  { path: 'user-profile', component: UserProfileComponent,canActivate: [AuthguardService] },
   { path: 'login-company', component: LoginCompanyComponent },
   { path: 'jobs/:id', component: JobDetailComponent, resolve:{data : JobDetailResolver}},
   { path: 'job-edit', component: JobEditComponent},

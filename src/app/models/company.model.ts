@@ -8,4 +8,5 @@ export class Company {
     country: string;
     jobemail: string;
     isVerified: boolean;
+    postalcode?: string;
 }

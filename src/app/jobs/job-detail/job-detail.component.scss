@@ -2,3 +2,35 @@
 {
     width: 15em;
 }
+
+.job-title-detail {
+    font-size: 14px;
+}
+
+.jobs-details-info {
+    border: 0px solid blue;
+    width: 96%;
+    float: left;
+}
+
+.details-company-info {
+    border: 0px solid red;
+    float: right;
+    margin-top: -50px;
+}
+
+.ads-action {
+    border: 0px solid red;
+    width:500px;
+}
+
+.list-border > li {
+    float: left;
+    margin-left: 20px;
+  }
+
+  .panel-details {
+    border: 0px solid #ddd;
+    background: white;
+    position: relative;
+  }

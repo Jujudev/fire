@@ -20,7 +20,6 @@ export class RegisterUserComponent implements OnInit {
   registerUser() {
     this.authService.register(this.newUser.email, this.newUser.password)
     .then(createdUser => {
-      this.authService.updateUserData(createdUser.user);
       console.log('createdUser', createdUser);
     })
     .catch(error => console.error(error.message));
@@ -29,7 +28,6 @@ export class RegisterUserComponent implements OnInit {
   loginUser() {
     this.authService.login(this.existingUser.email, this.existingUser.password)
     .then(value => {
-      this.authService.updateUserData(value.user);
       console.log('User logged successfully', value);
     })
     .catch(error => console.error('error : ',error.message));

@@ -25,12 +25,8 @@ export class LoginCompanyComponent implements OnInit {
         .then(
           (sucess) => {
             console.log(sucess);           
-            this.authService.updateCompanyUserData(sucess.user).then(status =>
-              {
-                this.router.navigate(['/company-profile']);
-              }             
-            );
-            
+            this.authService.setCompanyData();
+            this.router.navigate(['/company-profile']);
           }).catch(
               (err) => {
                 this.error = err;

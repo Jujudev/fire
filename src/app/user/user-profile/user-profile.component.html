@@ -4,12 +4,13 @@
         <div class="container">
               <div>
                   <div class="sectionHeader">
-                    <h2 *ngIf="(authService.user$ | async)">{{user.firstname}} {{user.lastname}} - {{user.profession}}</h2>                   
+                    <h2 *ngIf="(authService.user$ | async)">{{user.firstname}} {{user.lastname}}</h2>           
                   </div>
                     <div class="sectionIntro">
                         <div class="section11Profile" style="float: right;">
                             <img class="card-img-top imgProfile2" [src]="(authService.user$ | async)?.photoURL || 'assets/img/default-user.jpg'">
                         </div>
+                        <b><h3 *ngIf="(authService.user$ | async)">{{user.profession}}</h3></b>                   
                         <p *ngIf="(authService.user$ | async)" class="textintro">
                                 {{user.introduction}}
                         </p>               
@@ -21,8 +22,9 @@
                                       <mat-tab-group>
                                         <mat-tab label="Profil">
                                             <div *ngIf="(authService.user$ | async)">
-                                            <form class="form-horizontal"  id="profileForm" #profileForm = "ngForm" (ngSubmit)="onSubmitProfile(profileForm.value)">
-                                                <input  name="id" #id="ngModel" [(ngModel)]="user.uid" hidden="hidden" > 
+
+                                            <form class="form-horizontal"  id="profileForm" #profileForm = "ngForm" (ngSubmit)="onSubmitProfile(profileForm.value, profileForm)">
+                                                <input  name="uid" #uid="ngModel" [(ngModel)]="user.uid" hidden="hidden" > 
 
                                                 <div class="panel-user-profile-left">
                                                         
@@ -37,13 +39,13 @@
                                                             <div class="form-group">
                                                                     <div class="col-sm-9">
                                                                             <mat-form-field class="example-full-width">
-                                                                                    <input matInput name="firstname" #firstname="ngModel" [(ngModel)]="user.firstname" placeholder="Prenom" required />
+                                                                                    <input class="inputfield" matInput name="firstname" #firstname="ngModel" [(ngModel)]="user.firstname" placeholder="Prenom" required />
                                                                             </mat-form-field>
                                                                     </div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <div class="col-sm-9">
-                                                                        <mat-form-field class="example-full-width">
+                                                                        <mat-form-field class="example-full-width" >
                                                                                 <input matInput name="profession" #profession="ngModel"  [(ngModel)]="user.profession" placeholder="Profession" />
                                                                         </mat-form-field>
                                                                 </div>
@@ -85,7 +87,7 @@
                                                                                     <mat-option value="option1">0-3</mat-option>
                                                                                     <mat-option value="option2">3-6</mat-option>
                                                                                     <mat-option value="option3">6-10</mat-option>
-                                                                                    <mat-option value="option3">> 10</mat-option>
+                                                                                    <mat-option value="option3">10+</mat-option>
                                                                             </mat-select>
                                                                     </mat-form-field>
                                                             </div>

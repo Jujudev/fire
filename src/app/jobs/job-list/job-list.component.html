@@ -2,21 +2,26 @@
 <div id="wrapper">
    <div class="search-row-wrapper" style="background-image: url(assets/img/jobs/bgpurple.jpeg); background-size: cover; background-position: center center;">
    <div class="container text-center">
-       <div class="col-sm-3">
-           <input class="form-control keyword" type="text" placeholder="Titres, mots-clés">
+       <div class="col-sm-2">
+           <input class="form-control keyword" type="text" placeholder="Titres, mots-clés" [(ngModel)]="searchKeyValue" id="keyword" [ngModelOptions]="{standalone: true}">
        </div>
-       <div class="col-sm-3">
-           <select class="form-control" name="category" id="search-category">
-                <option selected="selected" value="">Tous les secteurs</option>
+       <div class="col-sm-2">
+           <select class="form-control" name="category" id="category" [(ngModel)]="searchCategory.value" aria-placeholder="Secteur">
+                <option *ngFor="let ctg of categories" [value]="ctg.value">{{ctg.viewValue}}</option>
            </select>
        </div>
-       <div class="col-sm-3">
-           <select class="form-control" name="location" id="id-location">
-               <option selected="selected" value="">Toutes les villes</option>
+       <div class="col-sm-2">
+           <select class="form-control" name="location" id="city" [(ngModel)]="searchCity.value">
+               <option *ngFor="let city of cities" [value]="city.value">{{city.viewValue}}</option>
            </select>
        </div>
-       <div class="col-sm-3">
-           <button class="btn btn-block btn-primary  "> Rechercher <i class="fa fa-search"></i></button>
+       <div class="col-sm-2">
+            <select class="form-control" name="contract" id="contract" [(ngModel)]="searchContract.value">
+                <option *ngFor="let ctr of contracttypes" [value]="ctr.value">{{ctr.viewValue}}</option>
+            </select>
+        </div>
+       <div class="col-sm-2">
+           <button class="btn btn-block btn-primary" (click)="onSearchClick()"> Rechercher <i class="fa fa-search"></i></button>
        </div>
    </div>
 </div>
@@ -32,7 +37,7 @@
                             <div class="col-lg-12  box-title no-border">
                                 <div class="inner">
                                     <h2>
-                                        <small> {{jobsCount}} offres trouvés</small>
+                                        <small> {{jobsCount}} offre(s) trouvée(s)</small>
                                     </h2>
                                 </div>
                             </div>
@@ -43,17 +48,17 @@
                         <!--/.tab-box-->
                         
                         <div class="adds-wrapper jobs-list">
-
-                        <ul>
-                            <li class="list-group-item" *ngFor="let job of jobList | async">
-                              <app-job-item-result [job]=job></app-job-item-result>
-                            </li>
-                        </ul>
+                            <ul>
+                                <li class="list-group-item" *ngFor="let job of jobList | async">
+                                <app-job-item-result [job]=job [display]=job.display></app-job-item-result>
+                                </li>
+                            </ul>
                         </div>
                         <!--/.adds-wrapper-->
 
-                        <div class="tab-box  save-search-bar text-center"><a href=""> <i class=" icon-star-empty"></i>
-                            Save Search </a></div>
+                        <div class="tab-box  save-search-bar text-center" *ngIf="authService.user$ | async as loggeduser"><a href="" *ngIf="loggeduser.roles.subscriber"> <i class=" icon-star-empty"></i>
+                            Save Search </a>
+                        </div>
                     </div>
                     <div class="pagination-bar text-center">
                         <ul class="pagination">

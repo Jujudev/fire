@@ -6,6 +6,8 @@ import { DatePipe } from '@angular/common';
 import { Company } from 'src/app/models/company.model';
 import { Job } from 'src/app/models/job.model';
 import { AuthService } from 'src/app/authentification/services/auth.service';
+import * as StaticData from 'src/app/shared/staticData';
+
 
 @Component({
   selector: 'app-job-edit',
@@ -15,26 +17,32 @@ import { AuthService } from 'src/app/authentification/services/auth.service';
 export class JobEditComponent implements OnInit {
   jobList : Array<any>;
   company : Company;
+  categories = StaticData.StaticDataClass.jobcategories;
+  contracttypes = StaticData.StaticDataClass.contracttypes;
+
+
   constructor(private jobService : JobService, private tostr : ToastrService, private authService: AuthService) { 
     if(authService)
     {
-      authService.company$.subscribe( val => {this.company = val as Company;})
+      authService.company$.subscribe( val => {
+        this.company = val as Company;
+        this.resetForm();
+        this.jobService.getCompanyJobs(this.company.uid)
+        .subscribe(result => {
+          this.jobList = result;
+        });
+      });
+
     }
   }
 
   ngOnInit() {
-    this.resetForm();
-    this.jobService.getCompanyJobs()
-    .subscribe(result => {
-      this.jobList = result;
-    });
-    
 
   }
 
   onSubmit(value, jobForm : NgForm)
   {
-    if(value.id == null)
+    if(value.id === null)
     {
       this.jobService.insertJob(value, this.company);
     }
@@ -68,6 +76,7 @@ export class JobEditComponent implements OnInit {
       companyId : null,
       companyName : null,
       email: '',
+      category: ''
     }
   }
 

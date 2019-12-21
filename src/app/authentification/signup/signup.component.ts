@@ -21,9 +21,8 @@ export class SignupComponent implements OnInit {
         .then(
           (sucess) => {
             console.log(sucess);
-            this.authService.updateUserData(sucess.user);
-            this.authService.sendEmailVerification();
-            this.router.navigate(['/']);
+              this.authService.sendEmailVerification();
+              this.router.navigate(['/']);            
           }).catch(
               (err) => {
                 this.error = err;
