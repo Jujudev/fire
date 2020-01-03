@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { Job } from 'src/app/models/job.model';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../authentification/services/auth.service';
+import { User } from 'src/app/authentification/services/user';
+
 
 @Component({
   selector: 'app-job-detail',
@@ -14,9 +16,11 @@ import { AuthService } from '../../authentification/services/auth.service';
 export class JobDetailComponent implements OnInit {
  
   job:any;
-  user:any;
-  constructor(private jobService : JobService, private route: ActivatedRoute, private router: Router, private tostr : ToastrService, public authService: AuthService) {
-    authService.user$.subscribe( val => {this.user = val;})
+  user:User;
+  constructor(public jobService : JobService, private route: ActivatedRoute, private router: Router, private tostr : ToastrService, public authService: AuthService) {
+    authService.user$.subscribe( val => {
+      this.user = val;
+    })
    }
 
   ngOnInit() {

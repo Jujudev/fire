@@ -9,9 +9,8 @@ import { AuthService } from '../authentification/services/auth.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  isLoggedIn$: Observable<boolean>;
 
-  constructor(private authService: AuthService) {
+  constructor(public authService: AuthService) {
     authService.user$.subscribe(userInfo =>
     {
       if(userInfo)

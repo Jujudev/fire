@@ -18,8 +18,6 @@ import { AuthService } from './authentification/services/auth.service';
 
 
 import { AppComponent } from './app.component';
-import { JobsComponent } from './jobs/jobs.component';
-import { JobComponent } from './jobs/job/job.component';
 import { JobListComponent } from './jobs/job-list/job-list.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
@@ -27,7 +25,6 @@ import { JobItemComponent } from './jobs/job-item/job-item.component';
 import { JobDetailComponent } from './jobs/job-detail/job-detail.component'
 import { JobDetailResolver } from './jobs/job-detail/job-detail.resolver';
 import { JobItemResultComponent } from './jobs/job-item-result/job-item-result.component';
-import { EmailComponent } from './authentification/email/email.component';
 import { SignupComponent } from './authentification/signup/signup.component';
 import { RegisterUserComponent } from './authentification/register/register-user/register-user.component';
 import { environment } from '../environments/environment';
@@ -43,15 +40,12 @@ import { PostedjobItemComponent } from './jobs/postedjob-item/postedjob-item.com
 @NgModule({
   declarations: [
     AppComponent,
-    JobsComponent,
-    JobComponent,
     JobListComponent,
     HeaderComponent,
     HomeComponent,
     JobItemComponent,
     JobDetailComponent,
     JobItemResultComponent,
-    EmailComponent,
     SignupComponent,
     RegisterUserComponent,
     LoginComponent,

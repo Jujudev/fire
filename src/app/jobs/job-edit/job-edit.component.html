@@ -1,50 +1,65 @@
 <div class="job-edit-container">
   <form id="jobForm" #jobForm = "ngForm" (ngSubmit)="onSubmit(jobForm.value, jobForm)">
-    <input  name="id" #id="ngModel" [(ngModel)]="jobService.selectedJob.$id" hidden="true" > 
+    <input  name="id" #id="ngModel" [(ngModel)]="selectedJob.$id" hidden="true" > 
     <div class="form-group">
         <mat-form-field class="example-full-width">
-              <input matInput name="title" #title="ngModel" [(ngModel)]="jobService.selectedJob.title" placeholder="Title" required />
+              <input matInput name="title" #title="ngModel" [(ngModel)]="selectedJob.title" placeholder="Title" required />
         </mat-form-field>
     </div>
     <div class="form-group">
       <mat-form-field class="example-full-width-textarea" >
-            <textarea  style="min-height:120px;" matInput name="description1" #description1="ngModel" [(ngModel)]="jobService.selectedJob.description1" placeholder="Description 1" required> </textarea>
+            <textarea  style="min-height:120px;" matInput name="description1" #description1="ngModel" [(ngModel)]="selectedJob.description1" placeholder="Description 1" required> </textarea>
       </mat-form-field>
     </div>
     <div class="form-group">
         <mat-form-field class="example-full-width-textarea">
-              <textarea  style="min-height:120px;" matInput name="description2" #description2="ngModel" [(ngModel)]="jobService.selectedJob.description2" placeholder="Description 2"> </textarea>
+              <textarea  style="min-height:120px;" matInput name="description2" #description2="ngModel" [(ngModel)]="selectedJob.description2" placeholder="Description 2"> </textarea>
         </mat-form-field>
     </div>
     <div class="form-group">
         <mat-form-field class="example-full-width">
-              <input matInput name="country" #country="ngModel" [(ngModel)]="jobService.selectedJob.country" placeholder="Pays" required />
+              <input matInput name="country" #country="ngModel" [(ngModel)]="selectedJob.country" placeholder="Pays" required />
         </mat-form-field>
     </div>
     <div class="form-group">
         <mat-form-field class="example-full-width">
-              <input matInput name="city" #city="ngModel" [(ngModel)]="jobService.selectedJob.city" placeholder="Ville" required />
+              <input matInput name="city" #city="ngModel" [(ngModel)]="selectedJob.city" placeholder="Ville" required />
         </mat-form-field>
     </div>
     <div class="form-group">
         <mat-form-field class="example-full-width">
-              <input matInput name="contractType" #contractType="ngModel" [(ngModel)]="jobService.selectedJob.contractType" placeholder="contractType" required />
+            <mat-label>Type de contrat</mat-label>
+            <mat-select  [(ngModel)]="selectedJob.contractType" name="contractType" required>
+                <mat-option *ngFor="let ctt of contracttypes" [value]="ctt.value">
+                    {{ctt.viewValue}}
+                </mat-option>
+              </mat-select>
         </mat-form-field>
     </div>
     <div class="form-group">
           <mat-form-field class="example-full-width">
-              <input matInput name="salary" #salary="ngModel" [(ngModel)]="jobService.selectedJob.salary" placeholder="Salalary" />
+              <input matInput name="salary" #salary="ngModel" [(ngModel)]="selectedJob.salary" placeholder="Salalary" />
           </mat-form-field>
     </div>
     <div class="form-group">
       <mat-form-field class="example-full-width">
-          <input matInput name="email" #email="ngModel" [(ngModel)]="jobService.selectedJob.email" placeholder="Email" />
+          <input matInput name="email" #email="ngModel" [(ngModel)]="selectedJob.email" placeholder="Email" required/>
       </mat-form-field>
+    </div>
+    <div class="form-group">
+        <mat-form-field class="example-full-width">
+            <mat-label>Secteur</mat-label>
+            <mat-select [(ngModel)]="selectedJob.category" name="category" required>
+                <mat-option *ngFor="let ctg of categories" [value]="ctg.value">
+                    {{ctg.viewValue}}
+                </mat-option>
+              </mat-select>
+        </mat-form-field>
     </div>
     <div class="form-group">
       <!--{{jobService.selectedJob.publishDate | date:'medium'}}-->
       <mat-form-field>
-          <input matInput name="publishDate" #publishDate="ngModel"  readonly="true" [matDatepicker]="picker" placeholder="PublishDate" [(ngModel)]="jobService.selectedJob.publishDate">
+          <input matInput name="publishDate" #publishDate="ngModel"   placeholder="PublishDate" [(ngModel)]="selectedJob.publishDate">
       </mat-form-field>
     </div>
     <div class="form-group">

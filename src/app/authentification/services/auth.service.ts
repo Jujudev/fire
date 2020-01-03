@@ -70,14 +70,12 @@ export class AuthService {
     this.angularfireAuth.auth.signInWithPopup(new auth.GoogleAuthProvider())    
     .then(credential =>  {
       console.info('Sign In with Google');
-      this.updateUserData(credential.user).then(status =>
-        this.router.navigate(['/'])
-      );
+      this.router.navigate(['/']);
       
   }).catch(
     (err) => {
-      this.error$ = err;
-      console.error('Error on Facebook ', this.error$);
+      this.error$ = of(err.message);
+      console.error('Error on Google', this.error$);
   });
   }
 
@@ -86,12 +84,11 @@ export class AuthService {
       this.angularfireAuth.auth.signInWithPopup(new auth.FacebookAuthProvider())    
       .then(credential =>  {
         console.info('Sign In with Facebook');
-        this.updateUserData(credential.user);
         this.router.navigate(['/']);
     }).catch(
       (err) => {
-        this.error$ = err;
-        console.error('Error on Facebook ', this.error$);
+        this.error$ = of(err.message);
+        console.error('Error on Facebook', this.error$);
     });
   }
 
@@ -101,11 +98,11 @@ export class AuthService {
     .then(
       (auth) => {
         console.log('sucess');           
-        this.updateUserData(auth.user);
         this.router.navigate(['/'])
       }).catch(
           (err) => {
-            this.error$ = err;
+            this.error$ = of(err.message);
+            console.error('Error on Email sign in', this.error$);
           }
       )
   }
@@ -137,7 +134,6 @@ export class AuthService {
       this.angularfireAuth.auth.createUserWithEmailAndPassword(company.email, password)    
       .then(credential =>  {
         console.info('Company created successfully');
-        this.updateCompanyUserData(credential.user);
         company.uid = credential.user.uid; 
         company.isVerified = false;
         this.sendEmailVerification();
@@ -146,70 +142,30 @@ export class AuthService {
     }).catch(
       (err) => {
         this.error$ = err;
-        console.error('Error on createCompanyWithEmailAndPassword');
+        console.error('Error on createCompanyWithEmailAndPassword ' + this.error$);
     });
 
   }
 
-  public updateUserAdditionalInfos(userId : string, profession: string, address: string, introduction : string)
-  {
-    var userRef  = this.afs.doc(`users/${userId}`).ref;
-    console.log('updateUserAdditionalInfos', userId)
-      return userRef.update({ 
-      address : address,
-      profession : profession,
-      introduction : introduction});
-  }
-
-  public updateUserData(user: firebase.User, profession?: string, address?: string, introduction?: string) {
-    // Sets user data to firestore on login
-    const displayName = this.angularfireAuth.auth.currentUser.displayName.split(' ');
-    var firstname = '';
-    var lastname = '';
-
-    for(var i = 0; i < displayName.length; i++)
-    {
-      if(i == 0)
-      {
-        firstname = displayName[i];
-      }
-      else {
-        lastname += displayName[i].concat(' ');
-      }
-    }
-
-    const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
-    return userRef.update({uid: user.uid,
+  updateUser(uid, user:User){
+    console.log('updateUser');
+    console.log(uid);
+    console.log(user.uid);
+    return this.afs.collection('users').doc(uid).update({uid: user.uid,
       email: user.email,
       roles: {
         subscriber: true
       },
-      firstname: firstname,
-      lastname: lastname,
-      phone: user.phoneNumber,
-      photoURL: user.photoURL});
+      firstname: user.firstname,
+      lastname: user.lastname,
+      phone: user.phone,
+      photoURL: user.photoURL,
+      profession: user.profession,
+      address: user.address,
+      introduction: user.introduction});
   }
 
-  public updateCompanyUserData(user) {
-    this.setCompanyData();
-    // Sets user data to firestore on login
-    const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
-    const data: User = {
-      uid: user.uid,
-      email: user.email,
-      roles: {
-        company: true
-      },
-      firstname: "",
-      lastname: "",
-      phone: "",
-      photoURL: "",
-      profession: "",
-      address: "",
-      introduction: ""
-    }
-    return userRef.set(data, { merge: true })
-  }
+
 
   public updateCompanyData(company) {
     // Sets company data to firestore on login
@@ -222,6 +178,7 @@ export class AuthService {
       name: company.name,
       jobemail: company.jobemail,
       isVerified: company.isVerified,
+      postalcode: company.postalcode
     }
     return userRef.set(data, { merge: true })
   }

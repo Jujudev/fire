@@ -11,19 +11,23 @@ import { AuthService } from '../services/auth.service';
 })
 export class SignupComponent implements OnInit {
   state: string = '';
+  firstname: string = '';
+  lastname: string = '';
+  email: string = '';
+  password: string = '';
   error: any;
 
   constructor(public af: AngularFireAuth, private router: Router, public authService: AuthService) { }
 
   onSubmit(formData) {
     if(formData.valid) {
+      console.log('onSubmit(formData)');
       this.af.auth.createUserWithEmailAndPassword(formData.value.email, formData.value.password)
         .then(
           (sucess) => {
             console.log(sucess);
-            this.authService.updateUserData(sucess.user);
-            this.authService.sendEmailVerification();
-            this.router.navigate(['/']);
+              this.authService.sendEmailVerification();
+              this.router.navigate(['/']);            
           }).catch(
               (err) => {
                 this.error = err;

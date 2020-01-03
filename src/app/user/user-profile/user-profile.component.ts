@@ -8,7 +8,9 @@ import { of } from 'rxjs';
 import { JobService } from 'src/app/jobs/shared/job.service';
 import { Job, UserJob } from 'src/app/models/job.model';
 import { User } from 'src/app/authentification/services/user';
+import { ToastrService } from 'ngx-toastr';
 import { NgForm } from '@angular/forms';
+
 
 
 @Component({
@@ -17,7 +19,7 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./user-profile.component.scss']
 })
 export class UserProfileComponent implements OnInit {
-  isCompany : Observable<boolean>;
+  isCompany : boolean;
   userJobLinksList : Observable<UserJob[]> = new Observable<UserJob[]>();
   postedJobs : Observable<Job[]> = new Observable<Job[]>();
   postedJobsCount : number = 0;
@@ -25,14 +27,16 @@ export class UserProfileComponent implements OnInit {
   user : User;
 
   
-  constructor(private authService: AuthService, private router: Router, private jobService: JobService) {
+  constructor(public authService: AuthService, private router: Router, private tostr : ToastrService, public jobService: JobService) {
     this.authService.user$
                  .take(1)
                  .map(user => _.has(_.get(user, 'roles'), 'company'))
                  .subscribe(authorized => {
-                  this.isCompany = of(authorized);
-                  if(this.isCompany)
+                  this.isCompany = authorized;
+                  if(this.isCompany === true)
+                  {
                     this.router.navigate(['/company-profile']);
+                  }
                  });
 
     this.authService.user$.subscribe(user =>
@@ -50,7 +54,8 @@ export class UserProfileComponent implements OnInit {
             ));
         this.userJobLinksList.subscribe( x => {       
             this.postedJobsId = x.map(({ jobUid }) => jobUid) as string[];
-            this.postedJobs = this.jobService.getPostedJobs(this.postedJobsId).pipe(
+            let jobIds = (this.postedJobsId === undefined) ? [''] : this.postedJobsId;
+            this.postedJobs = this.jobService.getPostedJobs(jobIds).pipe(
               map(changes => {
                   return changes.map(a => {
                     const data = a.payload.doc.data() as Job ;
@@ -68,14 +73,14 @@ export class UserProfileComponent implements OnInit {
 
   }
 
-  onSubmitProfile(value)
+  onSubmitProfile(value, jobForm : NgForm)
   {
-    if(value.id != null)
+    if(value.uid !== null)
     {
-      var userUpdate = value as User;
-      console.log('gooo gooo');
-
-      this.authService.updateUserAdditionalInfos(value.id, userUpdate.profession, userUpdate.address, userUpdate.introduction);
+      this.authService.updateUser(value.uid, this.user)
+      .then(() => {
+        this.tostr.success('Votre profil a été mis à jour', '');
+      });
     }
   }
 }

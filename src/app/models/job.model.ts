@@ -1,4 +1,6 @@
 import { Company } from './company.model';
+import * as StaticData from 'src/app/shared/staticData';
+
 
 export class Job {
     $id : string;
@@ -13,6 +15,13 @@ export class Job {
     companyId : number;
     companyName: string;
     email: string;
+    category: string;
+    keywordsbis?: {                                
+        selectedcat: string,
+        selectedtype: string
+        selectedcattype: string
+    }
+    display? : boolean
 }
 
 export class UserJob {

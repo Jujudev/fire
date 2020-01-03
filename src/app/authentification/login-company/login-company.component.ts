@@ -11,6 +11,8 @@ import { AuthService } from '../services/auth.service';
 })
 export class LoginCompanyComponent implements OnInit {
   error: any;
+  email: any;
+  password: any;
 
   constructor(public af: AngularFireAuth, public authService: AuthService, private router: Router) { 
 
@@ -25,12 +27,8 @@ export class LoginCompanyComponent implements OnInit {
         .then(
           (sucess) => {
             console.log(sucess);           
-            this.authService.updateCompanyUserData(sucess.user).then(status =>
-              {
-                this.router.navigate(['/company-profile']);
-              }             
-            );
-            
+            this.authService.setCompanyData();
+            this.router.navigate(['/company-profile']);
           }).catch(
               (err) => {
                 this.error = err;

@@ -33,8 +33,9 @@
                         <mat-tab-group>
                           <mat-tab label="Profile">
                                 <div class="panel-body-company-edit" *ngIf="(authService.company$ | async)">
-                                        <form class="form-horizontal" role="form" form id="companyForm" #companyForm = "ngForm" (ngSubmit)="onSubmit(companyForm.value, companyForm)">
-                                            <div class="form-group">
+                                        <form class="form-horizontal" role="form" form id="companyForm" #companyForm = "ngForm" (ngSubmit)="onSubmit(companyForm.value)">
+                                                <input  name="uid" #uid="ngModel" [(ngModel)]="data.uid" hidden="hidden" > 
+                                                <div class="form-group">
                                                     <div class="col-sm-9" >
                                                         <mat-form-field class="example-full-width">
                                                                 <input matInput name="name" #name="ngModel" [(ngModel)]="data.name" placeholder="Nom Compagnie" required />
@@ -59,7 +60,7 @@
                                             <div class="form-group">
                                                 <div class="col-sm-9">
                                                         <mat-form-field class="example-full-width">
-                                                                <input matInput placeholder="Boite Postale" value="Boite Postale">
+                                                                <input matInput name="postalcode" #postalcode="ngModel" [(ngModel)]="data.postalcode" placeholder="Boite Postale">
                                                         </mat-form-field>
                                                 </div>
                                             </div>
@@ -77,13 +78,17 @@
                                                             </mat-form-field>
                                                     </div>
                                                 </div>
+
+                                                <div class='btnContainer'>
+                                                        <button class="btn basic-btn bntundoleft" type="submit" [disabled]="!companyForm.valid">Enregister</button>
+                                                </div>
                                         </form>
 
-                                        <div class="form-group">
+                                        <!--<div class="form-group">
                                             <div class="col-sm-offset-3 col-sm-9 containerBtn">
                                                 <button type="submit" class="btn basic-btn">Enregister</button>
                                             </div>
-                                        </div>
+                                        </div>-->
                                     </div>
                           </mat-tab>
                           <mat-tab label="Offres d'emploi">

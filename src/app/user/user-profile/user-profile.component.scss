@@ -6,9 +6,9 @@
 }
 
 .imgProfile2 {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    border-radius: 2%;
     border: 0px solid #1FC8DB;
     box-shadow: 1px 1px 8px #aaa;
     /*filter: grayscale(100%);
@@ -25,6 +25,7 @@
     height: 50px;
     font-size: 1.5em;
     border-radius: 2px;
+    text-align: right;
 }
 
 .sectionHeader > h2{
@@ -88,11 +89,11 @@
 }
 
 .section11Profile {
-    border: solid 0px whitesmoke;
-    height: 120px;
-    width: 150px;
+    border: solid 0px red;
     float: left;
-    margin-top: -32px;
+    margin-top: 10px;
+    margin-right: 10px;
+
 }
 
 .section2Profile {
@@ -233,12 +234,12 @@ section:last-child {
 .btnContainer {
     border: solid 0px red;
     width: 100%;
-    padding-left: 3.4em;
+    padding-left: 2.4em;
     padding-bottom: 3.6em;
 }
 
 .bntundoleft {
-    margin-left: 5px;
+    margin-left: 0px;
 }
 
 .basic-btn {
@@ -265,19 +266,18 @@ section:last-child {
 .panel-user-profile-left
 {
     background-color: white;
-    width: 48%;
     border: solid 0px red;
-    padding: 50px;
     float: left;
+    margin: 30px 0 0 30px;
 }
 .panel-user-profile-right
 {
     background-color: white;
-    width: 48%;
     border: solid 0px red;
-    padding: 50px;
     float: left;
     margin-left: 0.5em;
+    margin-top: 30px;
+
 }
 
 .example-full-width-textarea {
@@ -311,10 +311,14 @@ section:last-child {
 }
 .textintro {
     font-size: 1.2em;
-    line-height: 1.5em;
-    font-style: italic;
+    line-height: 1.6em;
+    margin-right: 20px;
 }
 
 .example-full-width-combobox{
     width: 140px;
+}
+
+.example-full-width {
+    font-size: 16px;
 }

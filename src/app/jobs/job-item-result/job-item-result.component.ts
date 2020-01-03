@@ -9,8 +9,10 @@ import { Job } from '../../models/job.model';
 export class JobItemResultComponent implements OnInit {
 
   @Input() job: Job;
+  @Input() display: boolean;
 
-  constructor() { }
+  constructor() {
+   }
 
   ngOnInit() {
   }

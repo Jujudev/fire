@@ -23,35 +23,18 @@
                                     <p>{{job?.description1}}</p>
                                     <p>{{job?.description2}}</p>
                                 </div>
-                                <br/>
-                                <div class="col-md-4">
-                                    <aside class="panel panel-body panel-details job-summery">
-                                        <ul>
-                                            <li><p class=" no-margin "><strong>Compagnie:</strong> {{job?.companyName}} </p></li>
-                                            <li>
-                                                <p class=" no-margin "><strong>Salaire:</strong> {{job?.salary}} {{job?.currency}}</p>
-                                            </li>
-                                            <li>
-                                                <p class="no-margin"><strong>Type de Contrat:</strong> {{job?.contractType}}</p>
-                                            </li>
-                                            <li>
-                                                <p class="no-margin"><strong>Lieu:</strong> {{job.city}}, {{job.country}} </p>
-                                            </li>
-                                            <li>
-                                                    <p class="no-margin"><strong>Email:</strong> {{job?.email}} </p>
-                                            </li>
-                                        </ul>
-                                    </aside>
-                                    <div class="ads-action">
-                                        <ul class="list-border">
+                                <div style="clear: both"></div>
+
+                                    <div class="ads-action" *ngIf="authService.user$ | async as loggeduser">
+                                        <ul class="list-border" *ngIf="loggeduser.roles.subscriber">
                                             <li><a href="#"> <i class=" fa icon-mail"></i>Email</a></li>
                                             <li><a href="#"> <i class=" fa fa-heart"></i>Sauvegarder</a></li>
                                         </ul>
+                                        <div style="clear: both"></div>
                                     </div>
-                                </div>
                             </div>
-                            <div class="content-footer text-left">
-                                <button (click)="sendEmail()" id="btnSendEmail" class="btn  btn-primary"><i class=" icon-mail-2"></i> Postuler en ligne</button><br>
+                            <div class="content-footer text-left" *ngIf="authService.user$ | async as loggeduser">
+                                <button *ngIf="loggeduser.roles.subscriber" (click)="sendEmail()" id="btnSendEmail" class="btn  btn-primary">Postuler</button><br>
                             </div>
                         </div>
                     </div>
@@ -62,38 +45,29 @@
 
                 <div class="col-sm-3  page-sidebar-right">
                     <aside>
-                       <!-- 
-                        <div class="panel sidebar-panel panel-contact-seller">
-                            <div class="panel-heading">Employeur</div>
-                            <div class="panel-content user-info">
-                                <div class="panel-body text-center">
-                                    <div class="seller-info">
-                                        <div class="company-logo-thumb">
-                                            <a><img alt="img" class="img-responsive img-circle" src="images/jobs/company-logos/17.jpg"> </a></div>
-                                        <h3 class="no-margin"> {{job?.company.name}}</h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>                                                
-                        -->
                         <div class="panel sidebar-panel panel-contact-seller">
                             <div class="panel-heading">Company Information</div>
                             <div class="panel-content user-info">
-                                <div class="panel-body text-center">
-                                    <div class="seller-info">
-                                        <div class="company-logo-thumb">
-                                            <!-- <a><img alt="img" class="img-responsive img-circle"
-                                                    src="images/jobs/company-logos/17.jpg"> </a>
-                                            -->
-                                        </div>
-                                        <h3 class="no-margin"> Data Systems Ltd</h3>
-
-                                        <p>Location: <strong>New York</strong></p>
-
-                                        <p> Web: <strong>www.demoweb.com</strong></p>
-                                    </div>
-
-                                </div>
+                                <aside class="panel panel-body panel-details job-summery">
+                                    <ul>
+                                        <li><p class=" no-margin "><strong>Compagnie:</strong> {{job?.companyName}} </p></li>
+                                        <li>
+                                            <p class=" no-margin "><strong>Salaire:</strong> {{job?.salary}} {{job?.currency}}</p>
+                                        </li>
+                                        <li>
+                                            <p class="no-margin"><strong>Type de Contrat:</strong> {{job?.contractType.viewValue}}</p>
+                                        </li>
+                                        <li>
+                                            <p class="no-margin"><strong>Lieu:</strong> {{job.city}}, {{job.country}} </p>
+                                        </li>
+                                        <li>
+                                                <p class="no-margin"><strong>Secteur:</strong> {{job?.category}} </p>
+                                        </li>
+                                        <li>
+                                                <p class="no-margin"><strong>Email:</strong> {{job?.email}} </p>
+                                        </li>
+                                    </ul>
+                                </aside>
                             </div>
                         </div>
                         <div class="panel sidebar-panel">

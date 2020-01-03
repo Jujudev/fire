@@ -16,8 +16,8 @@ export class AuthguardService  implements CanActivate{
 
     canActivate(): Observable<boolean> {
         return  this.angularfireAuth.authState.pipe(
-          map(authState => {
-            if(!authState) {
+          map(status => {
+            if(!status) {
               this.router.navigate(['/login'])
             } else {
                 return true;

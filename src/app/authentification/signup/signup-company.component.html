@@ -9,21 +9,22 @@
         <img alt="AmJob" src="assets/img/logo-amjob.png" width="160px"/>
       </a>
     <br/><br/>
-    <span class="error" *ngIf="error">{{ error }}</span>
+
+    <span class="error" *ngIf="authService.error$ | async">{{ authService.error$ }}</span>
     
     <!-- Default form subscription -->
     <form class="text-center border border-light p-5" #formData='ngForm' (ngSubmit)="onSubmit(formData)" id="ngForm">
-        <input type="text" id="name"(ngModel)="name" name="name" required  class="form-control mb-4" placeholder="Nom Compagnie">
+        <input type="text" id="name" [(ngModel)]="name" name="name" required  class="form-control mb-4" placeholder="Nom Compagnie">
         <br/>
-        <input type="email" id="txtemail"(ngModel)="email" name="email" required  class="form-control mb-4" placeholder="E-mail">
+        <input type="email"  [(ngModel)]="email" name="email"  required  class="form-control mb-4" placeholder="E-mail">
         <br/>
-        <input type="password" id="txtpassword" class="form-control mb-4" placeholder="Password" required (ngModel)="Password" name="password">
+        <input type="password" id="txtpassword" class="form-control mb-4" placeholder="Password" required [(ngModel)]="password" name="password">
         <br/>
-        <input type="text" id="txtcity"(ngModel)="city" name="city" required  class="form-control mb-4" placeholder="Ville">
+        <input type="text" id="txtcity" [(ngModel)]="city" name="city" required  class="form-control mb-4" placeholder="Ville">
         <br/>
-        <input type="text" id="txtcountry"(ngModel)="country" name="country" required  class="form-control mb-4" placeholder="Pays">
+        <input type="text" id="txtcountry" [(ngModel)]="country" name="country" required  class="form-control mb-4" placeholder="Pays">
         <br/>
-        <input type="text" id="txtsecondemail"(ngModel)="secondemail" name="secondemail" required  class="form-control mb-4" placeholder="E-mail secondaire">
+        <input type="text" id="txtsecondemail" [(ngModel)]="secondemail" name="secondemail" required  class="form-control mb-4" placeholder="E-mail secondaire">
         <br/>
         <p class="txtconditions">
             Vous acceptez les Conditions d’utilisation, la Politique de confidentialité et la Politique relative aux cookies de AmJob.

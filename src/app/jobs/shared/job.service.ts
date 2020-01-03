@@ -11,13 +11,12 @@ import { Observable } from 'rxjs/Observable';
 export class JobService {
   private jobsBasePath : string = 'jobs';
   private usersJobsBasePath : string = 'users_jobs';
-  selectedJob: Job = new Job();
   postedJobList : Observable<any> = new Observable<any>();
 
   constructor(private db :AngularFirestore) { }
   
-  getCompanyJobs() {
-    return this.db.collection(this.jobsBasePath).snapshotChanges();
+  getCompanyJobs(companyUid:string) {
+    return this.db.collection(this.jobsBasePath, ref => ref.where("companyUid", "==", companyUid)).snapshotChanges();
   } 
 
   getJob(jobKey){
@@ -28,56 +27,90 @@ export class JobService {
     return this.db.collection('companies').doc(companyKey).snapshotChanges();
   }
 
-  updateJob(jobKey, value){
-    return this.db.collection(this.jobsBasePath).doc(jobKey).set(value);
+  updateJob(jobKey, job:Job){
+    return this.db.collection(this.jobsBasePath).doc(jobKey).update({
+      title : job.title,
+      description1 : job.description1,
+      description2: job.description2,
+      salary: job.salary,
+      publishDate : job.publishDate,
+      city: job.city,
+      country: job.country,
+      contractType: job.contractType,
+      companyId : job.companyId,
+      companyName: job.companyName,
+      email: job.email,
+      category: job.category,
+      keywordsbis: {                                
+          selectedcat: job.category,
+          selectedtype: job.contractType,
+          selectedcattype: job.category.concat(job.contractType)
+      },
+      display : job.display,
+    });
   }
+
 
   deleteJob(jobKey){
     return this.db.collection(this.jobsBasePath).doc(jobKey).delete();
   }
 
-  getJobs(){
+  getJobs(catKey?:string, contracttypeKey?:string){
     return this.db.collection(this.jobsBasePath).snapshotChanges();
   }
 
-  getJobsByCityAndTitle(city, key)
+  getJobsByCityAndTitle(city, key, catKey?:string, contracttypeKey?:string)
   {
     if(!this.isNotNullOrEmpty(key) && !this.isNotNullOrEmpty(city))
     {
-      return this.getJobs();
+      return this.getJobs(catKey, contracttypeKey);
     }
     else if (this.isNotNullOrEmpty(key) && !this.isNotNullOrEmpty(city))
     {
-      return this.searchJob(key);
+      return this.searchJob(key,catKey, contracttypeKey);
     }
     else if (!this.isNotNullOrEmpty(key) && this.isNotNullOrEmpty(city))
     {
-      return this.searchJobsByCity(city);
+      return this.searchJobsByCity(city, catKey, contracttypeKey);
     }
 
-    return this.searchJob(key + ' ' + city);
+    return this.searchJob(key + ' ' + city, catKey, contracttypeKey);
   }
 
-  searchJob(searchValue){
+    searchJob(searchValue, catKey?:string, contracttypeKey?:string){
+    let cat = ((catKey !== undefined)) ? catKey : '';
+    let contracttype = ((contracttypeKey !== undefined)) ? contracttypeKey : '';
+    let keySearch : string = cat.concat(contracttype);
     var textSearch = (searchValue as string).toLowerCase();
-    return this.db.collection(this.jobsBasePath, ref => ref.where("keywords", "array-contains", textSearch)).snapshotChanges();
+    return this.db.collection(this.jobsBasePath, ref => ref
+      .where("keywords", "array-contains", textSearch)).snapshotChanges()
   }
 
-  searchJobsByCity(searchValue){
+  searchJobsByCity(searchValue, catKey?:string, contracttypeKey?:string){
+    let cat = ((catKey !== undefined)) ? catKey : '';
+    let contracttype = ((contracttypeKey !== undefined)) ? contracttypeKey : '';
+    let keySearch : string = cat.concat(contracttype);
     return this.db.collection(this.jobsBasePath, ref => ref.where("city_lowercase", "==", searchValue)).snapshotChanges();
   }
 
   getUserPostLinks(userUid)
   {
+    console.log('getUserPostLinks:'+userUid)
     return this.db.collection(this.usersJobsBasePath, ref => ref.where("userUid", "==", userUid)).snapshotChanges();
   }
   
   getPostedJobs(jobsIds:string[]){
-    if(!jobsIds || jobsIds.length == 0)
+    console.log('getPostedJobs');
+    console.log(jobsIds);
+    if(jobsIds === undefined || jobsIds.length === 0)
     {
+      console.log('nada');
       return new Observable<any[]>();
     }
-    return this.db.collection(this.jobsBasePath, ref => ref.where("uid", "in", jobsIds)).snapshotChanges();;
+    else
+    {
+      return this.db.collection(this.jobsBasePath, ref => ref.where("uid", "in", jobsIds)).snapshotChanges();
+    }
   }
   
   insertJob(job, company:Company){
@@ -91,6 +124,7 @@ export class JobService {
       country: job.country,
       city: job.city,
       email: job.email,
+      category: job.category
     }).then(
       (insertedJob) => {
         console.log(insertedJob);           
