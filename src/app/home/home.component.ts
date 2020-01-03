@@ -22,8 +22,6 @@ export class HomeComponent implements OnInit {
   constructor(public jobService : JobService, private router: Router) { }
 
   ngOnInit() {
-    
-    console.info('loading jobs');
     this.jobList = this.jobService.getJobs().pipe(
       map(changes => {
         this.items = changes;

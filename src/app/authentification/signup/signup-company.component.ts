@@ -10,13 +10,13 @@ import { Company } from 'src/app/models/company.model';
   styleUrls: ['./signup-company.component.scss']
 })
 export class SignupCompanyComponent implements OnInit {
-  error: any;
-  email: any;
+  error: string;
+  email: string;
   password: any;
-  secondemail: any;
-  city: any;
-  name: any;
-  country: any;
+  secondemail: string;
+  city: string;
+  name: string;
+  country: string;
   newCompany:Company = new Company();
 
   constructor(public af: AngularFireAuth, private router: Router, public authService: AuthService) { }
@@ -32,12 +32,11 @@ export class SignupCompanyComponent implements OnInit {
       this.newCompany.name = this.name;
       this.newCompany.isVerified = false;
       this.newCompany.jobemail = this.secondemail;
-
+      this.newCompany.postalcode = '';
       this.authService.createCompanyWithEmailAndPassword(this.newCompany, this.password);
 
       if(this.authService.error$)
       {
-        this.error = this.authService.error$;
       }
       else
       {

@@ -74,8 +74,8 @@ export class AuthService {
       
   }).catch(
     (err) => {
-      this.error$ = err;
-      console.error('Error on Facebook ', this.error$);
+      this.error$ = of(err.message);
+      console.error('Error on Google', this.error$);
   });
   }
 
@@ -87,8 +87,8 @@ export class AuthService {
         this.router.navigate(['/']);
     }).catch(
       (err) => {
-        this.error$ = err;
-        console.error('Error on Facebook ', this.error$);
+        this.error$ = of(err.message);
+        console.error('Error on Facebook', this.error$);
     });
   }
 
@@ -101,7 +101,8 @@ export class AuthService {
         this.router.navigate(['/'])
       }).catch(
           (err) => {
-            this.error$ = err;
+            this.error$ = of(err.message);
+            console.error('Error on Email sign in', this.error$);
           }
       )
   }
@@ -141,7 +142,7 @@ export class AuthService {
     }).catch(
       (err) => {
         this.error$ = err;
-        console.error('Error on createCompanyWithEmailAndPassword');
+        console.error('Error on createCompanyWithEmailAndPassword ' + this.error$);
     });
 
   }

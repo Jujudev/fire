@@ -17,6 +17,7 @@ import * as StaticData from 'src/app/shared/staticData';
 export class JobEditComponent implements OnInit {
   jobList : Array<any>;
   company : Company;
+  selectedJob : Job;
   categories = StaticData.StaticDataClass.jobcategories;
   contracttypes = StaticData.StaticDataClass.contracttypes;
 
@@ -25,29 +26,35 @@ export class JobEditComponent implements OnInit {
     if(authService)
     {
       authService.company$.subscribe( val => {
+        
         this.company = val as Company;
+        if((this.selectedJob) && (this.selectedJob.email === ''))
+        {
+          this.selectedJob.email = this.company.email;
+        }
         this.resetForm();
         this.jobService.getCompanyJobs(this.company.uid)
         .subscribe(result => {
           this.jobList = result;
         });
       });
-
     }
   }
 
   ngOnInit() {
-
+    this.resetSelectedJob();
   }
 
   onSubmit(value, jobForm : NgForm)
   {
     if(value.id === null)
     {
+      console.log("start insert : ")
       this.jobService.insertJob(value, this.company);
     }
     else
     {
+      console.log("start update : ")
       this.jobService.updateJob(value.id, value);
     }
       this.resetForm(jobForm);
@@ -63,7 +70,7 @@ export class JobEditComponent implements OnInit {
   
   resetSelectedJob()
   {
-    this.jobService.selectedJob = {
+    this.selectedJob = {
       $id : null,
       title : '',
       description1 : '',
@@ -72,18 +79,28 @@ export class JobEditComponent implements OnInit {
       publishDate: new Date(Date.now()),
       city: '',
       country:'',
-      contractType: 'CDI',
+      contractType: StaticData.StaticDataClass.contracttypes[0].value,
       companyId : null,
       companyName : null,
       email: '',
-      category: ''
+      category: '',
+      keywordsbis: {                                
+        selectedcat: '',
+        selectedtype: '',
+        selectedcattype: ''
+    },
+    display : false
+    }
+    if(this.company)
+    {
+      this.selectedJob.email = this.company.email;
     }
   }
 
   onEdit(job : Job, id : string){
-    console.info('Editing job...', id); 
-    this.jobService.selectedJob = Object.assign({}, job);
-    this.jobService.selectedJob.$id = id;
+    console.info('Editing job...', this.selectedJob.description1); 
+    this.selectedJob = Object.assign({}, job);
+    this.selectedJob.$id = id;
   }
 
   onDelete(key : string) {

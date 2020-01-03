@@ -35,8 +35,6 @@ export class UserProfileComponent implements OnInit {
                   this.isCompany = authorized;
                   if(this.isCompany === true)
                   {
-                    console.log('authrized :'+ authorized);
-                    console.log('Iscompany = true');
                     this.router.navigate(['/company-profile']);
                   }
                  });
@@ -46,7 +44,6 @@ export class UserProfileComponent implements OnInit {
       if(user)
       {
         this.user = user;
-        console.log('before-getUserPostLinks ', user.uid)
         this.userJobLinksList = this.jobService.getUserPostLinks(user.uid).pipe(
           map(changes => {
               return changes.map(a => {

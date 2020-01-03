@@ -17,9 +17,6 @@ export class Job {
     email: string;
     category: string;
     keywordsbis?: {                                
-        all : string,
-        allcat : string,
-        alltype: string,
         selectedcat: string,
         selectedtype: string
         selectedcattype: string

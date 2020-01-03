@@ -11,7 +11,6 @@ import { Observable } from 'rxjs/Observable';
 export class JobService {
   private jobsBasePath : string = 'jobs';
   private usersJobsBasePath : string = 'users_jobs';
-  selectedJob: Job = new Job();
   postedJobList : Observable<any> = new Observable<any>();
 
   constructor(private db :AngularFirestore) { }
@@ -28,25 +27,40 @@ export class JobService {
     return this.db.collection('companies').doc(companyKey).snapshotChanges();
   }
 
-  updateJob(jobKey, value){
-    return this.db.collection(this.jobsBasePath).doc(jobKey).set(value);
+  updateJob(jobKey, job:Job){
+    return this.db.collection(this.jobsBasePath).doc(jobKey).update({
+      title : job.title,
+      description1 : job.description1,
+      description2: job.description2,
+      salary: job.salary,
+      publishDate : job.publishDate,
+      city: job.city,
+      country: job.country,
+      contractType: job.contractType,
+      companyId : job.companyId,
+      companyName: job.companyName,
+      email: job.email,
+      category: job.category,
+      keywordsbis: {                                
+          selectedcat: job.category,
+          selectedtype: job.contractType,
+          selectedcattype: job.category.concat(job.contractType)
+      },
+      display : job.display,
+    });
   }
+
 
   deleteJob(jobKey){
     return this.db.collection(this.jobsBasePath).doc(jobKey).delete();
   }
 
   getJobs(catKey?:string, contracttypeKey?:string){
-    let cat = ((catKey !== undefined)) ? catKey : '';
-    let contracttype = ((contracttypeKey !== undefined)) ? contracttypeKey : '';
-    let keySearch : string = cat.concat(contracttype);
     return this.db.collection(this.jobsBasePath).snapshotChanges();
   }
 
   getJobsByCityAndTitle(city, key, catKey?:string, contracttypeKey?:string)
   {
-    console.log(key);
-    console.log(city);
     if(!this.isNotNullOrEmpty(key) && !this.isNotNullOrEmpty(city))
     {
       return this.getJobs(catKey, contracttypeKey);

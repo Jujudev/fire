@@ -23,7 +23,7 @@
                                     {value: 'saint-louis', viewValue: 'Saint-Louis'},
                                     {value: 'sedhiou', viewValue: 'Sédhiou'},
                                     {value: 'tambacounda', viewValue: 'Tambacounda'},
-                                    {value: 'thies', viewValue: 'Thiès'},
+                                    {value: 'thiès', viewValue: 'Thiès'},
                                     {value: 'ziguinchor', viewValue: 'Ziguinchor'},
                                 ];
 
@@ -34,6 +34,9 @@
                                     {value: 'commerce', viewValue: 'Commerce'},
                                     {value: 'construction', viewValue: 'Construction'},
                                     {value: 'enseignement', viewValue: 'Enseignement'},
+                                    {value: 'technologie', viewValue: 'Technologie'},
+                                    {value: 'sante', viewValue: 'Santé'},
+                                    {value: 'cultureart', viewValue: 'Culture et Art'},
                                     {value: 'restauration', viewValue: 'Restauration'},
                                     {value: 'immobilier', viewValue: 'Immobilier'},
                                 ];
