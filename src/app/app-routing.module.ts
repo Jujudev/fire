@@ -7,7 +7,6 @@ import { JobDetailResolver } from './jobs/job-detail/job-detail.resolver';
 import { JobSearchResultResolver } from './jobs/job-list/job-search-result.resolver';
 import { LoginComponent } from './authentification/login/login.component';
 import { SignupComponent } from './authentification/signup/signup.component';
-import { EmailComponent } from './authentification/email/email.component';
 import { AuthguardService } from './authentification/services/authguard.service';
 import { AuthorGuardService } from './authentification/services/author-guard.service';
 import { UserProfileComponent } from './user/user-profile/user-profile.component';
@@ -23,7 +22,6 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component : SignupComponent },
   { path: 'company-signup', component : SignupCompanyComponent },
-  { path: 'login-email', component: EmailComponent },
   { path: 'user-profile', component: UserProfileComponent,canActivate: [AuthguardService] },
   { path: 'login-company', component: LoginCompanyComponent },
   { path: 'jobs/:id', component: JobDetailComponent, resolve:{data : JobDetailResolver}},

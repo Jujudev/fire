@@ -17,7 +17,7 @@ export class JobDetailComponent implements OnInit {
  
   job:any;
   user:User;
-  constructor(private jobService : JobService, private route: ActivatedRoute, private router: Router, private tostr : ToastrService, public authService: AuthService) {
+  constructor(public jobService : JobService, private route: ActivatedRoute, private router: Router, private tostr : ToastrService, public authService: AuthService) {
     authService.user$.subscribe( val => {
       this.user = val;
     })

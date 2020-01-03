@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
   age_filtered_items: Array<any>;
   name_filtered_items: Array<any>;
 
-  constructor(private jobService : JobService, private router: Router) { }
+  constructor(public jobService : JobService, private router: Router) { }
 
   ngOnInit() {
     

@@ -20,7 +20,7 @@ import { NgForm } from '@angular/forms';
 })
 export class CompanyProfileComponent implements OnInit {
   data : Company;
-  constructor(private authService: AuthService, private jobService : JobService, private tostr : ToastrService) { 
+  constructor(public authService: AuthService, public jobService : JobService, private tostr : ToastrService) { 
     this.authService.setCompanyData();
     if(authService.company$)
     {

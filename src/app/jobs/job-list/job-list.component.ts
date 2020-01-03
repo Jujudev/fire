@@ -28,7 +28,7 @@ export class JobListComponent implements OnInit {
   searchContract : StaticData.ContractType;
 
 
-  constructor(private jobService : JobService, private route: ActivatedRoute, public authService: AuthService) {
+  constructor(public jobService : JobService, private route: ActivatedRoute, public authService: AuthService) {
     this.searchContract  = {value: '', viewValue: 'Tous les contrats'};
     this.searchCity  = {value: '', viewValue: 'Toutes les régions'};
     this.searchCategory = {value: '', viewValue: 'Tous les secteurs'};

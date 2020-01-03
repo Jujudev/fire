@@ -19,7 +19,7 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./user-profile.component.scss']
 })
 export class UserProfileComponent implements OnInit {
-  isCompany : Observable<boolean>;
+  isCompany : boolean;
   userJobLinksList : Observable<UserJob[]> = new Observable<UserJob[]>();
   postedJobs : Observable<Job[]> = new Observable<Job[]>();
   postedJobsCount : number = 0;
@@ -27,14 +27,18 @@ export class UserProfileComponent implements OnInit {
   user : User;
 
   
-  constructor(private authService: AuthService, private router: Router, private tostr : ToastrService, private jobService: JobService) {
+  constructor(public authService: AuthService, private router: Router, private tostr : ToastrService, public jobService: JobService) {
     this.authService.user$
                  .take(1)
                  .map(user => _.has(_.get(user, 'roles'), 'company'))
                  .subscribe(authorized => {
-                  this.isCompany = of(authorized);
-                  if(this.isCompany)
+                  this.isCompany = authorized;
+                  if(this.isCompany === true)
+                  {
+                    console.log('authrized :'+ authorized);
+                    console.log('Iscompany = true');
                     this.router.navigate(['/company-profile']);
+                  }
                  });
 
     this.authService.user$.subscribe(user =>
@@ -42,7 +46,6 @@ export class UserProfileComponent implements OnInit {
       if(user)
       {
         this.user = user;
-
         console.log('before-getUserPostLinks ', user.uid)
         this.userJobLinksList = this.jobService.getUserPostLinks(user.uid).pipe(
           map(changes => {
@@ -75,12 +78,12 @@ export class UserProfileComponent implements OnInit {
 
   onSubmitProfile(value, jobForm : NgForm)
   {
-    console.log('onSubmitProfile')
-    console.log(value.uid)
     if(value.uid !== null)
     {
       this.authService.updateUser(value.uid, this.user)
-      .then(() => this.tostr.success('Votre profil a été mis à jour', ''));
+      .then(() => {
+        this.tostr.success('Votre profil a été mis à jour', '');
+      });
     }
   }
 }

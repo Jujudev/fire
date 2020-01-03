@@ -11,6 +11,8 @@ import { AuthService } from '../services/auth.service';
 })
 export class LoginCompanyComponent implements OnInit {
   error: any;
+  email: any;
+  password: any;
 
   constructor(public af: AngularFireAuth, public authService: AuthService, private router: Router) { 
 

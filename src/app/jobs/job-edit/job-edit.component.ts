@@ -21,7 +21,7 @@ export class JobEditComponent implements OnInit {
   contracttypes = StaticData.StaticDataClass.contracttypes;
 
 
-  constructor(private jobService : JobService, private tostr : ToastrService, private authService: AuthService) { 
+  constructor(public jobService : JobService, private tostr : ToastrService, private authService: AuthService) { 
     if(authService)
     {
       authService.company$.subscribe( val => {

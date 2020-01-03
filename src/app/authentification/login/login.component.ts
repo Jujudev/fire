@@ -12,9 +12,11 @@ import { AuthService } from '../services/auth.service';
 })
 export class LoginComponent implements OnInit {
   error: any;
+  email: any;
+  password: any;
 
   constructor(public af: AngularFireAuth, public authService: AuthService, private router: Router)  { 
-    this.authService.user$.subscribe(u => {
+    this.af.user.subscribe(u => {
       if(u) {
         console.log(u.email);
         this.router.navigateByUrl('/');
